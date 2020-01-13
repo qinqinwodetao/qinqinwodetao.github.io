@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+    <head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#">
+    <meta charset="UTF-8" /><meta name="theme-color" content="#1c1c21" />
+        <script>
+            const userPrefers = localStorage.getItem('theme');
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const lightModeMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+            if (userPrefers === "dark") {
+                changeModeMeta("dark");
+            } else if (userPrefers === "light") {
+                changeModeMeta("light");
+            } else if (darkModeMediaQuery.matches) {
+                changeModeMeta("dark");
+            } else if (lightModeMediaQuery.matches) {
+                changeModeMeta("light");
+            }
+            function changeModeMeta() {
+                document.documentElement.setAttribute('data-theme', arguments[0]);
+                if (arguments[0] === "dark") {
+                    changeThemeColor("#1c1c21");
+                } else {
+                    changeThemeColor("#fff");
+                }
+            }
+            function changeThemeColor() {
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', arguments[0]);
+            }
+        </script>
+
+    
+        
+        
+        <script>
+            if (window.location.host == "vkill.com" && window.location.protocol != "https:") {
+                window.location.protocol = "https";
+            }
+        </script>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    
+    <meta name="renderer" content="webkit" />
+
+    <meta name="generator" content="Hugo 0.62.2" />
+
+    <title>往 NexT 主题的归档页面加入 12 生肖 | vkill</title>
+
+    <link rel="stylesheet" href="../../css/meme.min.7a07eed0b3e1535d38185b2b8372c41fd93789db72b0fa04d1a967047ffbf1e9.css" integrity="sha256-egfu0LPhU104GFsrg3LEH9k3idtysPoE0alnBH/78ek=" data-instant-track />
+
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700,700i|Noto+Serif+SC:400,700|Source+Code+Pro:400,400i,700,700i|Cinzel+Decorative:700&display=swap&subset=chinese-simplified" rel="stylesheet" />
+
+    <meta name="author" content="wucy" />
+    
+    
+    <meta name="description" content="小时候总喜欢围坐在老爷爷老奶奶旁边，让自己的思维随着耳边流动的故事飘走，而这些有趣的……" />
+    <meta name="keywords" content="hexo, memories" />
+    
+    <link rel="shortcut icon" type="image/ico" href="../../favicon.ico" />
+    <link rel="mask-icon" href="../../icons/safari-pinned-tab.svg" color="#2a6df4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="vkill" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="vkill" />
+    <meta name="msapplication-starturl" content="../../" />
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="../../icons/mstile-150x150.png" />
+    <link rel="manifest" href="../../manifest.json" />
+
+    
+    
+
+    
+    <link rel="canonical" href="https://vkill.com/tech/add-chinese-zodiac-to-next/" />
+
+
+
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "datePublished": "2018-08-27T10:21:30+08:00",
+        "dateModified": "2020-01-13T22:52:54+08:00",
+        "url": "https://vkill.com/tech/add-chinese-zodiac-to-next/",
+        "headline": "往 NexT 主题的归档页面加入 12 生肖",
+        "description": "小时候总喜欢围坐在老爷爷老奶奶旁边，让自己的思维随着耳边流动的故事飘走，而这些有趣的……",
+        "keywords": "hexo, memories",
+        "inLanguage" : "zh-CN",
+        "articleSection": "tech",
+        "wordCount":  1962 ,
+        "image": ["https://vkill.com/images/add-chinese-zodiac-to-next-title.jpg","https://vkill.com/images/add-chinese-zodiac-to-next-1.jpg","https://vkill.com/images/add-chinese-zodiac-to-next-2.jpg"],
+        "author": {
+            "@type": "Person",
+            "description": "happy wife, happy life",
+            "email": "wucy1991@gmail.com",
+            "image": "https://vkill.com/icons/apple-touch-icon.png",
+            "url": "https://vkill.com/",
+            "name": "wucy"
+        },
+        "license": "在保留本文作者及本文链接的前提下，非商业用途随意转载分享。",
+        "publisher": {
+            "@type": "Organization",
+            "name": "vkill",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://vkill.com/icons/apple-touch-icon.png"
+            },
+            "url": "https://vkill.com/"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebSite",
+            "@id": "https://vkill.com/"
+        }
+    }
+</script>
+
+    
+
+
+
+<meta name="twitter:card" content="summary_large_image" />
+
+
+<meta name="twitter:site" content="@wucy" />
+<meta name="twitter:creator" content="@wucy1991" />
+
+    
+
+
+
+
+
+
+<meta property="og:title" content="往 NexT 主题的归档页面加入 12 生肖" />
+<meta property="og:description" content="小时候总喜欢围坐在老爷爷老奶奶旁边，让自己的思维随着耳边流动的故事飘走，而这些有趣的……" />
+<meta property="og:url" content="https://vkill.com/tech/add-chinese-zodiac-to-next/" />
+<meta property="og:site_name" content="vkill" />
+<meta property="og:locale" content="zh-CN" />
+            <meta property="og:locale:alternate" content="en-US" />
+        <meta property="og:image" content="https://vkill.com/images/add-chinese-zodiac-to-next-title.jpg" />
+<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2018-08-27T10:21:30+08:00" />
+    <meta property="article:modified_time" content="2020-01-13T22:52:54+08:00" />
+    
+    <meta property="article:section" content="tech" />
+    <meta property="article:tag" content="hexo, memories" />
+
+        
+
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-100434861-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-100434861-1');
+    </script>
+
+
+
+
+    
+</head>
+
+    <body>
+        <div class="container">
+            
+    <header class="header">
+        <div class="site-brand">
+            
+            <a href="../../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66.146 26.458" class="brand"><path d="M58.216 17.03v-2.505c1.084 0 3.793.067 5.351.225l.068-.067c-.045-.204-.068-.655-.068-.858 0-.204.023-.633.068-.836l-.068-.067c-1.332.112-2.687.225-5.35.225V11.5c0-.384.022-2.438.18-2.98 3.025 0 6.457.27 6.457.27l.045-.09c-.022-.18-.045-.722-.045-.925 0-.18 0-.474.045-.79l-.045-.068c-.361.045-.88.068-1.355.068h-6.863c-.768 0-1.897-.068-1.897-.068l-.045.068c.18 1.287.271 2.822.271 4.515v5.532c0 1.693-.09 3.296-.27 4.515l.022.068s1.129-.068 1.919-.068h7.09c.473 0 .993.023 1.354.068l.045-.068c-.045-.293-.045-.587-.045-.813 0-.225.022-1.06.045-1.241l-.045-.09s-3.658.496-6.683.496c-.158-.542-.18-2.483-.18-2.867zm-20.694-3.363l-.113-.068c0-.497-.022-1.445-.045-1.648-.045-.136-.068-.226-.203-.226-.655.113-2.123.113-2.913.068l-.045.067c.158.971.248 2.71.248 4.38v1.242c0 1.694-.09 2.845-.27 4.064l.022.068s.948-.068 1.739-.068c.767 0 1.67.068 1.67.068l.045-.068c-.18-1.287-.225-2.348-.225-4.064v-2.28c.948-1.152 1.76-1.829 2.393-1.829.858 0 1.332.316 1.332 1.829v2.28c0 1.694-.09 2.845-.27 4.064l.022.068s1.016-.068 1.806-.068c.767 0 1.648.068 1.648.068l.045-.068c-.18-1.287-.27-2.348-.27-4.064v-1.987c0-.316 0-.406-.023-.677 1.083-1.197 1.58-1.445 2.46-1.445.723 0 1.242.497 1.242 2.01v2.1c0 1.693-.09 2.844-.27 4.063l.022.068s1.016-.068 1.806-.068c.768 0 1.648.068 1.648.068l.046-.068c-.181-1.287-.271-2.348-.271-4.064v-2.258c0-2.257-.79-3.59-3.229-3.59-1.129 0-2.303.452-3.59 1.807-.451-1.129-1.084-1.806-3.093-1.806-1.106 0-2.506.925-3.364 2.032zm-12.436 2.122c.068-1.106.339-1.874.677-2.348a1.645 1.645 0 0 1 1.377-.677c.904 0 1.468 1.06 1.468 3.025zm6.209 3.341c-1.061.858-2.145.926-3.093.926-1.107 0-1.92-.293-2.461-.88-.497-.542-.745-1.332-.745-2.371h2.235c2.258 0 4.2.045 4.2.045l.135-.135c0-2.823-.79-5.08-4.268-5.08-1.241 0-2.596.406-3.5 1.129-1.083.903-1.828 2.28-1.828 4.131 0 1.332.474 2.755 1.423 3.703.767.813 2.1 1.174 3.793 1.174 1.625 0 3.228-.52 4.47-1.942 0-.293-.135-.7-.361-.7zM4 6.803c-.835 4.832-2.032 10.499-2.98 14.811.248-.068.767-.068 1.038-.068.249 0 1.016 0 1.265.068.067-2.37.632-7.157 1.241-10.68l.068.023a153.476 153.476 0 0 1 4.29 10.59h1.445c1.648-3.749 3.454-7.135 5.373-10.612h.068c.43 3.567.723 6.931 1.039 10.679.338-.068 1.422-.068 1.76-.068.34 0 1.31 0 1.649.068-.7-4.9-1.197-9.257-1.784-14.811h-2.009L10.82 17.302h-.09c-1.784-3.568-3.094-6.864-4.426-10.499z"/></svg></a>
+            
+        </div>
+    </header>
+
+            
+            <div class="lang-toggle" onmouseover="langSwitcherOver()" onmouseout="langSwitcherOut()" data-hide="true">
+        🇨🇳
+        
+            
+        
+    </div>
+
+            
+    
+        
+            
+        
+        <div id="theme-toggle" onclick="modeSwitcher()" data-hide="true">🌙</div>
+    
+
+            
+    <main class="main single" id="main">
+    <div class="main-inner">
+
+        <article class="content post" data-align="justify" data-type="tech">
+
+            <h1 class="post-title">往 NexT 主题的归档页面加入 12 生肖</h1>
+
+            
+
+            
+                
+            
+
+            
+
+            <div class="post-body"><p><img src="../../images/add-chinese-zodiac-to-next-title.jpg" alt="add-chinese-zodiac-to-next-title.jpg"><span class="caption">◎ 可爱的 12 生肖</span></p>
+<p style="text-indent:0"><span class="drop-cap">小</span>时候总喜欢围坐在老爷爷老奶奶旁边，让自己的思维随着耳边流动的故事飘走，而这些有趣的故事之中，最喜欢的莫过于那些神奇的神话传说，关于鬼、神、以及天。其中，十二生肖应该是多数人的美好童年回忆，现在就让我们在自己的博客加上这些元素以延续那些美好回忆！</p>
+<h2 id="灵感来源"><a href="#灵感来源" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>灵感来源</h2>
+<p>正如页脚跳动的小红心的灵感来源是 <a href="https://diygod.me/">DIYgod</a>，十二生肖的灵感来源也是一个博客——<a href="http://forsigner.com/">Forsigner</a>。</p>
+<h2 id="操作步骤"><a href="#操作步骤" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>操作步骤</h2>
+<p>1）下载字体：<a href="../../uploads/chinese-zodiac.zip" target="_blank" rel="noopener">chinese-zodiac.zip (23.2KB)</a>，下载后将解压的三个字体文件全部放在 <code>~/blog/source/fonts/</code> 下（若无 <code>fonts</code> 文件夹请自建）。</p>
+<p>2）新建文件：保存到下面的目录，文件名为 chinese-zodiac.swig。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-html" data-lang="html"><span class="c">&lt;!--</span><span class="c"> 文件位置：~/blog/themes/next/layout/_partials/chinese</span><span class="c">-</span><span class="c">zodiac.swig </span><span class="c">--&gt;</span>
+
+{% if year % 12 == 0 %}
+<span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;symbolic-animals icon-monkey&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">i</span><span class="p">&gt;</span>
+{% endif %}
+{% if year % 12 == 1 %}
+<span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;symbolic-animals icon-rooster&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">i</span><span class="p">&gt;</span>
+{% endif %}
+{% if year % 12 == 2 %}
+<span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;symbolic-animals icon-dog&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">i</span><span class="p">&gt;</span>
+{% endif %}
+{% if year % 12 == 3 %}
+<span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;symbolic-animals icon-pig&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">i</span><span class="p">&gt;</span>
+{% endif %}
+{% if year % 12 == 4 %}
+<span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;symbolic-animals icon-rat&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">i</span><span class="p">&gt;</span>
+{% endif %}
+{% if year % 12 == 5 %}
+<span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;symbolic-animals icon-ox&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">i</span><span class="p">&gt;</span>
+{% endif %}
+{% if year % 12 == 6 %}
+<span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;symbolic-animals icon-tiger&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">i</span><span class="p">&gt;</span>
+{% endif %}
+{% if year % 12 == 7 %}
+<span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;symbolic-animals icon-rabbit&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">i</span><span class="p">&gt;</span>
+{% endif %}
+{% if year % 12 == 8 %}
+<span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;symbolic-animals icon-dragon&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">i</span><span class="p">&gt;</span>
+{% endif %}
+{% if year % 12 == 9 %}
+<span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;symbolic-animals icon-snake&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">i</span><span class="p">&gt;</span>
+{% endif %}
+{% if year % 12 == 10 %}
+<span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;symbolic-animals icon-horse&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">i</span><span class="p">&gt;</span>
+{% endif %}
+{% if year % 12 == 11 %}
+<span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;symbolic-animals icon-goat&#34;</span><span class="p"></span><span class="p">&gt;</span><span class="p">&lt;</span><span class="p">/</span><span class="nt">i</span><span class="p">&gt;</span>
+{% endif %}
+</code></pre></td></tr></table>
+</div>
+</div><p>3）修改文件：编辑 archive.swig 文件，删除红色一行，增加几行（复制粘贴后删除每行前面的 <code>+</code> 号）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-diff" data-lang="diff">&lt;!-- 文件位置：~/blog/themes/next/layout/archive.swig --&gt;
+
+          &lt;div class=&#34;collection-title&#34;&gt;
+<span class="gd">-            &lt;{% if theme.seo %}h2{% else %}h1{% endif %} class=&#34;archive-year&#34; id=&#34;archive-year-{{ year }}&#34;&gt;{{ year }}&lt;/{% if theme.seo %}h2{% else %}h1{% endif %}&gt;
+</span><span class="gd"></span><span class="gi">+            &lt;{% if theme.seo %}h2{% else %}h1{% endif %} class=&#34;archive-year&#34; id=&#34;archive-year-{{ year }}&#34;&gt;
+</span><span class="gi"></span><span class="gi">+              {{ year }}
+</span><span class="gi"></span><span class="gi">+              &lt;div class=&#34;chinese-zodiac&#34;&gt;
+</span><span class="gi"></span><span class="gi">+                {% include &#39;_partials/chinese-zodiac.swig&#39; %}
+</span><span class="gi"></span><span class="gi">+              &lt;/div&gt;
+</span><span class="gi"></span><span class="gi">+            &lt;/{% if theme.seo %}h2{% else %}h1{% endif %}&gt;
+</span><span class="gi"></span>          &lt;/div&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>4）添加样式：将下面的 CSS 代码加入到 custom.styl。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-css" data-lang="css"><span class="c">/* 文件位置：~/blog/themes/next/source/css/_custom/custom.styl */</span>
+
+<span class="p">.</span><span class="nc">chinese-zodiac</span> <span class="p">{</span>
+    <span class="k">float</span><span class="p">:</span> <span class="kc">right</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">@</span><span class="k">font-face</span> <span class="p">{</span>
+  <span class="nt">font-family</span><span class="o">:</span> <span class="s1">&#39;chinese-zodiac&#39;</span><span class="o">;</span>
+  <span class="nt">font-display</span><span class="o">:</span> <span class="nt">swap</span><span class="o">;</span>
+  <span class="nt">src</span><span class="o">:</span> <span class="nt">url</span><span class="o">(</span><span class="s1">&#39;/fonts/chinese-zodiac.eot&#39;</span><span class="o">)</span><span class="o">;</span>
+  <span class="nt">src</span><span class="o">:</span> <span class="nt">url</span><span class="o">(</span><span class="s1">&#39;/fonts/chinese-zodiac.eot&#39;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s1">&#39;embedded-opentype&#39;</span><span class="o">)</span><span class="o">,</span>
+       <span class="nt">url</span><span class="o">(</span><span class="s1">&#39;/fonts/chinese-zodiac.woff2&#39;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s1">&#39;woff2&#39;</span><span class="o">)</span><span class="o">,</span>
+       <span class="nt">url</span><span class="o">(</span><span class="s1">&#39;/fonts/chinese-zodiac.woff&#39;</span><span class="o">)</span> <span class="nt">format</span><span class="o">(</span><span class="s1">&#39;woff&#39;</span><span class="o">)</span><span class="o">;</span>
+  <span class="nt">font-weight</span><span class="o">:</span> <span class="nt">normal</span><span class="o">;</span>
+  <span class="nt">font-style</span><span class="o">:</span> <span class="nt">normal</span><span class="o">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">symbolic-animals</span> <span class="p">{</span>
+  <span class="k">display</span><span class="p">:</span> <span class="kc">inline</span><span class="o">-</span><span class="kc">block</span><span class="p">;</span>
+  <span class="k">font</span><span class="p">:</span> <span class="kc">normal</span> <span class="kc">normal</span> <span class="kc">normal</span> <span class="mi">14</span><span class="kt">px</span><span class="o">/</span><span class="mi">1</span> <span class="n">chinese-zodiac</span><span class="p">;</span>
+  <span class="k">font-size</span><span class="p">:</span> <span class="kc">inherit</span><span class="p">;</span>
+  <span class="n">text-rendering</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+  <span class="kp">-webkit-</span><span class="n">font-smoothing</span><span class="p">:</span> <span class="n">antialiased</span><span class="p">;</span>
+  <span class="kp">-moz-</span><span class="n">osx-font-smoothing</span><span class="p">:</span> <span class="n">grayscale</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">icon-dragon</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span> <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;\e806&#39;</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">icon-tiger</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span> <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;\e809&#39;</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">icon-pig</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span> <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;\e810&#39;</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">icon-horse</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span> <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;\e813&#39;</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">icon-rat</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span> <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;\e816&#39;</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">icon-goat</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span> <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;\e818&#39;</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">icon-snake</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span> <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;\e820&#39;</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">icon-ox</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span> <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;\e822&#39;</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">icon-dog</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span> <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;\e825&#39;</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">icon-rabbit</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span> <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;\e826&#39;</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">icon-monkey</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span> <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;\e829&#39;</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">.</span><span class="nc">icon-rooster</span><span class="p">:</span><span class="nd">before</span> <span class="p">{</span> <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;\e82f&#39;</span><span class="p">;</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>5）更进一步：经过上面的四步已经 OK 了，但你可能会发现单个分类页面和单个标签页面的时间轴没有效果，这是因为 NexT 主题不在这些页面添加年份分割，要想修改请参考我的另一篇<a href="../../tech/hexo-next-optimization/#%E6%97%B6%E9%97%B4%E8%BD%B4%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%B9%B4%E4%BB%BD%E5%88%86%E9%9A%94">文章 5.5 节</a>。</p>
+<h2 id="相关说明"><a href="#相关说明" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>相关说明</h2>
+<p>1）<code>chinese-zodiac.zip</code></p>
+<p>字体来自 Hexo 主题 Fexo 的 fontello.ttf<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 文件，我自己在 Linux 上用跑在虚拟机 XP 系统里的 FontCreator 修改了一下，字体版权归原作者所有<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。</p>
+<p><img src="../../images/add-chinese-zodiac-to-next-1.jpg" alt="add-chinese-zodiac-to-next-1.jpg"></p>
+<p>主要有以下几项：</p>
+<ol>
+<li>字体名称，将 fontello 改为 chinese-zodiac；</li>
+<li>字符数量，删除大部分，只保留了十二生肖；</li>
+<li>字符名称，将拼音修改为相应英文<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>；</li>
+<li>字体版权，添加原作者的版权信息；</li>
+<li>字体描述，添加如图🌚。</li>
+</ol>
+<p><img src="../../images/add-chinese-zodiac-to-next-2.jpg" alt="add-chinese-zodiac-to-next-2.jpg"></p>
+<p>另外，ttf 和 woff 格式由 FontCreator 自动导出，eot 格式由一个在线网站<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>生成，woff2 格式由 ttf2woff2<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> 生成。</p>
+<p>2）<code>chinese-zodiac.swig</code></p>
+<p>由于是代码小白，且不懂 swig 的语法，所以这个文件写的有点🌚... 参考了 Fexo 的 item-year.ejs<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup> 的代码逻辑，参考了 swig 的中文文档<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>。</p>
+<p>3）<code>chinese-zodiac.css</code></p>
+<p>没有这个文件啦🌚，我参考了 font-awesome.css<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup> 和 fontello.scss<sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup> 的相关 CSS 代码。</p>
+<hr>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>链接：<a href="https://github.com/forsigner/fexo/blob/master/source/fonts/fontello.ttf">https://github.com/forsigner/fexo/blob/master/source/fonts/fontello.ttf</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>版权：<a href="https://github.com/forsigner/fexo/blob/master/LICENSE">https://github.com/forsigner/fexo/blob/master/LICENSE</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>参考：<a href="https://zhidao.baidu.com/question/32577566.html">https://zhidao.baidu.com/question/32577566.html</a> <a href="#fnref:3" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>网址：<a href="https://www.kirsle.net/wizards/ttf2eot.cgi">https://www.kirsle.net/wizards/ttf2eot.cgi</a> <a href="#fnref:4" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>链接：<a href="https://github.com/nfroidure/ttf2woff2">https://github.com/nfroidure/ttf2woff2</a> <a href="#fnref:5" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>链接：<a href="https://github.com/forsigner/fexo/blob/master/layout/_partial/component/item-year.ejs">https://github.com/forsigner/fexo/blob/master/layout/_partial/component/item-year.ejs</a> <a href="#fnref:6" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7" role="doc-endnote">
+<p>链接：<a href="https://myvin.github.io/swig.zh-CN/docs/tags/index.html#if">https://myvin.github.io/swig.zh-CN/docs/tags/index.html#if</a> <a href="#fnref:7" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:8" role="doc-endnote">
+<p>链接：<a href="https://github.com/theme-next/hexo-theme-next/blob/master/source/lib/font-awesome/css/font-awesome.css">https://github.com/theme-next/hexo-theme-next/blob/master/source/lib/font-awesome/css/font-awesome.css</a> <a href="#fnref:8" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:9" role="doc-endnote">
+<p>链接：<a href="https://github.com/forsigner/fexo/blob/master/source/sass/_fontello.scss">https://github.com/forsigner/fexo/blob/master/source/sass/_fontello.scss</a> <a href="#fnref:9" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+</div>
+
+        </article>
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+    <footer class="minimal-footer">
+        
+            
+            <div class="post-tag"><a href="../../tags/hexo/" rel="tag" class="post-tag-link">#hexo</a> <a href="../../tags/memories/" rel="tag" class="post-tag-link">#memories</a></div>
+        
+        
+            <div class="post-category">
+                <a href="../../tech/" class="post-category-link active">tech</a> | <a href="../../life/" class="post-category-link">life</a>
+            </div>
+        
+        
+    </footer>
+
+
+        
+
+        
+
+        
+
+    </div>
+</main>
+
+            
+    <div id="back-to-top" class="back-to-top">
+        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon"><path d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"/></svg></a>
+    </div>
+
+            
+        </div>
+        <script src="../../js/meme.min.10b69ef81544b96691de93039f8eeb6403f8a00b15efb5a7d14f327d2fbd5c99.js" integrity="sha256-ELae+BVEuWaR3pMDn47rZAP4oAsV77Wn0U8yfS+9XJk=" data-no-instant></script>
+
+
+    <script data-no-instant>InstantClick.init();</script>
+
+
+    <script data-no-instant>
+        InstantClick.on('change', function () {
+            backToTop();
+        });
+    </script>
+
+
+
+    <script data-no-instant>
+        InstantClick.on('change', function () {
+            const userPrefers = localStorage.getItem('theme');
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const lightModeMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+            if (userPrefers === "dark") {
+                changeModeMeta("dark");
+                changeMode("🌙", "chroma", "chroma-dark");
+            } else if (userPrefers === "light") {
+                changeModeMeta("light");
+                changeMode("🌞", "chroma-dark", "chroma");
+            } else if (darkModeMediaQuery.matches) {
+                changeModeMeta("dark");
+                changeMode("🌙", "chroma", "chroma-dark");
+            } else if (lightModeMediaQuery.matches) {
+                changeModeMeta("light");
+                changeMode("🌞", "chroma-dark", "chroma");
+            }
+        });
+    </script>
+<script data-no-instant>
+            InstantClick.on('change', function () {
+                gtag('config', 'UA-100434861-1', {
+                    'page_path': location.pathname + location.search
+                });
+            });
+        </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+
+<script>
+    var scroll = new SmoothScroll('a[href*="#"]', {
+        speedAsDuration: true
+    });
+</script>
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist/medium-zoom.min.js"></script>
+
+<script>
+    mediumZoom('[data-zoomable]', {
+        background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)'
+    })
+</script>
+
+
+
+
+    <div class="app-refresh" id="app-refresh">
+        <div class="app-refresh-wrap" onclick="location.reload()">
+            <label>已更新最新版本</label>
+            <span>点击刷新</span>
+        </div>
+    </div>
+
+    <script>
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('../../sw.js')
+            .then(reg => {
+                reg.addEventListener('updatefound', () => {
+                    newWorker = reg.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed') {
+                            if (navigator.serviceWorker.controller) {
+                                showNotification();
+                            }
+                        }
+                    });
+                });
+            });
+        }
+        
+        function showNotification() {
+            document.querySelector('meta[name=theme-color]').content = '#000';
+            document.getElementById('app-refresh').className += ' app-refresh-show';
+        }
+    </script>
+
+
+
+
+
+
+
+    </body>
+</html>

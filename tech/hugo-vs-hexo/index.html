@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+    <head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#">
+    <meta charset="UTF-8" /><meta name="theme-color" content="#1c1c21" />
+        <script>
+            const userPrefers = localStorage.getItem('theme');
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const lightModeMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+            if (userPrefers === "dark") {
+                changeModeMeta("dark");
+            } else if (userPrefers === "light") {
+                changeModeMeta("light");
+            } else if (darkModeMediaQuery.matches) {
+                changeModeMeta("dark");
+            } else if (lightModeMediaQuery.matches) {
+                changeModeMeta("light");
+            }
+            function changeModeMeta() {
+                document.documentElement.setAttribute('data-theme', arguments[0]);
+                if (arguments[0] === "dark") {
+                    changeThemeColor("#1c1c21");
+                } else {
+                    changeThemeColor("#fff");
+                }
+            }
+            function changeThemeColor() {
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', arguments[0]);
+            }
+        </script>
+
+    
+        
+        
+        <script>
+            if (window.location.host == "vkill.com" && window.location.protocol != "https:") {
+                window.location.protocol = "https";
+            }
+        </script>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    
+    <meta name="renderer" content="webkit" />
+
+    <meta name="generator" content="Hugo 0.62.2" />
+
+    <title>Hugo 与 Hexo 的异同 | vkill</title>
+
+    <link rel="stylesheet" href="../../css/meme.min.7a07eed0b3e1535d38185b2b8372c41fd93789db72b0fa04d1a967047ffbf1e9.css" integrity="sha256-egfu0LPhU104GFsrg3LEH9k3idtysPoE0alnBH/78ek=" data-instant-track />
+
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700,700i|Noto+Serif+SC:400,700|Source+Code+Pro:400,400i,700,700i|Cinzel+Decorative:700&display=swap&subset=chinese-simplified" rel="stylesheet" />
+
+    <meta name="author" content="wucy" />
+    
+    
+    <meta name="description" content="一句话：Hexo 是一个博客框架，Hugo 是一个网站框架。" />
+    <meta name="keywords" content="hugo, hexo" />
+    
+    <link rel="shortcut icon" type="image/ico" href="../../favicon.ico" />
+    <link rel="mask-icon" href="../../icons/safari-pinned-tab.svg" color="#2a6df4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="vkill" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="vkill" />
+    <meta name="msapplication-starturl" content="../../" />
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="../../icons/mstile-150x150.png" />
+    <link rel="manifest" href="../../manifest.json" />
+
+    
+    
+
+    
+    <link rel="canonical" href="https://vkill.com/tech/hugo-vs-hexo/" />
+
+
+
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "datePublished": "2019-11-14T11:25:35+08:00",
+        "dateModified": "2020-01-13T22:52:54+08:00",
+        "url": "https://vkill.com/tech/hugo-vs-hexo/",
+        "headline": "Hugo 与 Hexo 的异同",
+        "description": "一句话：Hexo 是一个博客框架，Hugo 是一个网站框架。",
+        "keywords": "hugo, hexo",
+        "inLanguage" : "zh-CN",
+        "articleSection": "tech",
+        "wordCount":  5527 ,
+        "image": ["https://vkill.com/images/hugo-vs-hexo.png","https://vkill.com/images/git-submodule.png","https://vkill.com/images/hexo-permalinks.png"],
+        "author": {
+            "@type": "Person",
+            "description": "happy wife, happy life",
+            "email": "wucy1991@gmail.com",
+            "image": "https://vkill.com/icons/apple-touch-icon.png",
+            "url": "https://vkill.com/",
+            "name": "wucy"
+        },
+        "license": "在保留本文作者及本文链接的前提下，非商业用途随意转载分享。",
+        "publisher": {
+            "@type": "Organization",
+            "name": "vkill",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://vkill.com/icons/apple-touch-icon.png"
+            },
+            "url": "https://vkill.com/"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebSite",
+            "@id": "https://vkill.com/"
+        }
+    }
+</script>
+
+    
+
+
+
+<meta name="twitter:card" content="summary_large_image" />
+
+
+<meta name="twitter:site" content="@wucy" />
+<meta name="twitter:creator" content="@wucy1991" />
+
+    
+
+
+
+
+
+
+<meta property="og:title" content="Hugo 与 Hexo 的异同" />
+<meta property="og:description" content="一句话：Hexo 是一个博客框架，Hugo 是一个网站框架。" />
+<meta property="og:url" content="https://vkill.com/tech/hugo-vs-hexo/" />
+<meta property="og:site_name" content="vkill" />
+<meta property="og:locale" content="zh-CN" />
+            <meta property="og:locale:alternate" content="en-US" />
+        <meta property="og:image" content="https://vkill.com/images/hugo-vs-hexo.png" />
+<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2019-11-14T11:25:35+08:00" />
+    <meta property="article:modified_time" content="2020-01-13T22:52:54+08:00" />
+    
+    <meta property="article:section" content="tech" />
+    <meta property="article:tag" content="hugo, hexo" />
+
+        
+
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-100434861-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-100434861-1');
+    </script>
+
+
+
+
+    
+</head>
+
+    <body>
+        <div class="container">
+            
+    <header class="header">
+        <div class="site-brand">
+            
+            <a href="../../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66.146 26.458" class="brand"><path d="M58.216 17.03v-2.505c1.084 0 3.793.067 5.351.225l.068-.067c-.045-.204-.068-.655-.068-.858 0-.204.023-.633.068-.836l-.068-.067c-1.332.112-2.687.225-5.35.225V11.5c0-.384.022-2.438.18-2.98 3.025 0 6.457.27 6.457.27l.045-.09c-.022-.18-.045-.722-.045-.925 0-.18 0-.474.045-.79l-.045-.068c-.361.045-.88.068-1.355.068h-6.863c-.768 0-1.897-.068-1.897-.068l-.045.068c.18 1.287.271 2.822.271 4.515v5.532c0 1.693-.09 3.296-.27 4.515l.022.068s1.129-.068 1.919-.068h7.09c.473 0 .993.023 1.354.068l.045-.068c-.045-.293-.045-.587-.045-.813 0-.225.022-1.06.045-1.241l-.045-.09s-3.658.496-6.683.496c-.158-.542-.18-2.483-.18-2.867zm-20.694-3.363l-.113-.068c0-.497-.022-1.445-.045-1.648-.045-.136-.068-.226-.203-.226-.655.113-2.123.113-2.913.068l-.045.067c.158.971.248 2.71.248 4.38v1.242c0 1.694-.09 2.845-.27 4.064l.022.068s.948-.068 1.739-.068c.767 0 1.67.068 1.67.068l.045-.068c-.18-1.287-.225-2.348-.225-4.064v-2.28c.948-1.152 1.76-1.829 2.393-1.829.858 0 1.332.316 1.332 1.829v2.28c0 1.694-.09 2.845-.27 4.064l.022.068s1.016-.068 1.806-.068c.767 0 1.648.068 1.648.068l.045-.068c-.18-1.287-.27-2.348-.27-4.064v-1.987c0-.316 0-.406-.023-.677 1.083-1.197 1.58-1.445 2.46-1.445.723 0 1.242.497 1.242 2.01v2.1c0 1.693-.09 2.844-.27 4.063l.022.068s1.016-.068 1.806-.068c.768 0 1.648.068 1.648.068l.046-.068c-.181-1.287-.271-2.348-.271-4.064v-2.258c0-2.257-.79-3.59-3.229-3.59-1.129 0-2.303.452-3.59 1.807-.451-1.129-1.084-1.806-3.093-1.806-1.106 0-2.506.925-3.364 2.032zm-12.436 2.122c.068-1.106.339-1.874.677-2.348a1.645 1.645 0 0 1 1.377-.677c.904 0 1.468 1.06 1.468 3.025zm6.209 3.341c-1.061.858-2.145.926-3.093.926-1.107 0-1.92-.293-2.461-.88-.497-.542-.745-1.332-.745-2.371h2.235c2.258 0 4.2.045 4.2.045l.135-.135c0-2.823-.79-5.08-4.268-5.08-1.241 0-2.596.406-3.5 1.129-1.083.903-1.828 2.28-1.828 4.131 0 1.332.474 2.755 1.423 3.703.767.813 2.1 1.174 3.793 1.174 1.625 0 3.228-.52 4.47-1.942 0-.293-.135-.7-.361-.7zM4 6.803c-.835 4.832-2.032 10.499-2.98 14.811.248-.068.767-.068 1.038-.068.249 0 1.016 0 1.265.068.067-2.37.632-7.157 1.241-10.68l.068.023a153.476 153.476 0 0 1 4.29 10.59h1.445c1.648-3.749 3.454-7.135 5.373-10.612h.068c.43 3.567.723 6.931 1.039 10.679.338-.068 1.422-.068 1.76-.068.34 0 1.31 0 1.649.068-.7-4.9-1.197-9.257-1.784-14.811h-2.009L10.82 17.302h-.09c-1.784-3.568-3.094-6.864-4.426-10.499z"/></svg></a>
+            
+        </div>
+    </header>
+
+            
+            <div class="lang-toggle" onmouseover="langSwitcherOver()" onmouseout="langSwitcherOut()" data-hide="true">
+        🇨🇳
+        
+            
+        
+    </div>
+
+            
+    
+        
+            
+        
+        <div id="theme-toggle" onclick="modeSwitcher()" data-hide="true">🌙</div>
+    
+
+            
+    <main class="main single" id="main">
+    <div class="main-inner">
+
+        <article class="content post" data-align="justify" data-type="tech">
+
+            <h1 class="post-title">Hugo 与 Hexo 的异同</h1>
+
+            
+
+            
+                
+                    <div class="post-description">一句话：Hexo 是一个博客框架，Hugo 是一个网站框架。</div>
+                
+            
+
+            
+
+            <div class="post-body"><p><img src="../../images/hugo-vs-hexo.png" alt="hugo-vs-hexo.png"></p>
+<h2 id="前言"><a href="#前言" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>前言</h2>
+<p><a href="https://gohugo.io/">Hugo</a> 是一个基于 <a href="https://golang.org/">Go</a> 语言开发的静态网站生成器（<a href="https://www.staticgen.com/">SSG</a>），目前由 <a href="https://github.com/bep">@bep</a> 领衔开发，Hugo 的突出特点是简洁、灵活、高效，目前有很多知名网站都在使用 Hugo：<a href="https://www.netlify.com/">Netlify</a>、<a href="https://letsencrypt.org/">Let’s Encrypt</a>、<a href="https://ipfs.io/">IPFS</a>、<a href="https://developers.cloudflare.com/">Cloudflare Developers</a>、<a href="https://www.digitalocean.com/docs/">DigitalOcean Docs</a>、<a href="https://1password.com/">1Password</a> 等等。与目前国内流行的 <a href="https://hexo.io/">Hexo</a> 相比，Hugo 的速度可称为飞速🚀——在安装和使用上都是如此。</p>
+<p>下面，我们就来看一下 Hugo 与 Hexo 的一些异同，不过需要注意的是：此文主要探讨的是用户层面上的一些异同，而非技术层面的差异。简体中文来说🐼：即一个技术小白（我）从 Hexo 迁移到 Hugo 时遇到的一些常见问题。</p>
+<h2 id="目录结构"><a href="#目录结构" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>目录结构</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-sh" data-lang="sh">~/blog $ tree -L 1
+.                     <span class="c1"># 说明             Hexo</span>
+├── archetypes/     <span class="c1"># 文章模板          scaffolds/</span>
+├── assets/         <span class="c1"># Hugo 管道</span>
+├── config.toml     <span class="c1"># 配置文件          _config.yml</span>
+├── content/        <span class="c1"># 文章目录          source/_posts/</span>
+├── data/           <span class="c1"># Hugo 数据文件     source/_data/</span>
+├── layouts/        <span class="c1"># 布局模板</span>
+├── public/         <span class="c1"># 生成的静态文件     public/</span>
+├── resources/      <span class="c1"># Hugo 缓存</span>
+├── static/         <span class="c1"># 网站的静态文件     source/</span>
+└── themes/         <span class="c1"># 主题目录          themes/</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在 Hugo 中，与 Hexo 的一个很大不同——也可以说是优点——是主题目录与站点目录有一样的结构，以 <a href="../../tech/documentation-of-hugo-theme-meme/">MemE</a> 主题举个例子（已剔除无关文件）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-sh" data-lang="sh">~/blog/themes/meme $ tree -L 1
+.
+├── assets/
+├── data/
+├── i18n/
+├── layouts/
+└── static/
+</code></pre></td></tr></table>
+</div>
+</div><p>其中，<code>assets</code>、<code>data</code>、<code>layouts</code>、<code>static</code> 的作用都是与站点目录下的相应文件夹相同的，且站点目录下的文件可以覆盖主题目录下的相应文件——这意味着你可以在不修改主题文件的前提下方便地定制主题。在 Hugo 中，如果你想要定制主题，你只需在站点目录下新建相应的文件即可。这是非常利于主题的维护的，你只需使用 Git 的 <code>submodule</code> 的方式安装 Hugo 的主题，然后更新时只需直接在站点根目录下敲一条命令回车即可，非常方便！同时，这在持续集成部署时也会方便很多，这点你可以在 GitHub 中看出来，如下图。</p>
+<p><img src="../../images/git-submodule.png" alt="git-submodule.png"><span class="caption">◎ 以子模块的方式安装主题</span></p>
+<p>此外，上面的 <code>i18n</code> 文件夹相当于 Hexo 的主题中的 <code>languages</code> 文件夹，如果你不喜欢主题的一些文字翻译，可以在站点目录下新建相应文件自定义。这里特别需要提醒的是，Hugo 中的 <code>data</code> 和 <code>i18n</code> 文件夹下的所有文件都是可以按「键」覆盖的，即你无需复制文件全文，只需添加你想自定义的那项即可。</p>
+<h2 id="配置文件"><a href="#配置文件" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>配置文件</h2>
+<p>Hugo 中是不区分站点和主题的配置文件的，Hugo 中只有一个位于站点根目录下的 <code>config.toml</code> 配置文件<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>。你可能注意到 <code>.toml</code> 后缀，没错，Hugo 默认使用的配置文件是 <a href="https://github.com/toml-lang/toml">TOML</a> 格式的，它的语法是非常简单易懂的，它在语法上也没有缩进的要求<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>。当然，在 Hugo 中你也可使用 Hexo 默认的 YAML 格式，但我还是建议你使用 TOML，毕竟入乡随俗嘛😺。此外，如果你想将文章中的 Front Matter 也从 YAML 转换成 TOML 的话，推荐一个 <a href="https://github.com/wd/hexo2hugo">Python 脚本</a>，是我在<a href="https://wdicc.com/migrate-blog-to-hugo/">这篇文章</a>中发现的。但<strong class="emphasis-point">特别注意</strong>：尝试前务必先备份！</p>
+<h2 id="分类方式和组织方式"><a href="#分类方式和组织方式" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>分类方式和组织方式</h2>
+<p>实话实说，这应该是从 Hexo 迁移到 Hugo 中遇到的最难的问题了，主要是概念上很难转过来。我们知道，在 Hexo 中有两种分类方式——<a href="../../tech/categories+tags/">分类和标签</a>，它们都是在文章的 Front Matter 中设置的，其中：<code>categories</code> 是具有顺序性和层次性的，即你可以通过它来实现树状结构的分类；<code>tags</code> 则没有这种特点，它的作用只是将不同的文章联系起来。由于 Hexo 中的 <code>categories</code> 具有这样的特点，因此在 Hexo 中 <code>categories</code> 可以作为一种文章的组织方式——在 Hexo 中你可以将 <code>categories</code> 用在文章的 URL 结构中。</p>
+<p><sup style="float:right" id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup><img src="../../images/hexo-permalinks.png" alt="hexo-permalinks.png"><span class="caption">◎ Hexo 中的 URL 结构配置</span></p>
+<p>但是在 Hugo 中这是无法实现的，在 Hugo 中你是无法将文章的 Front Matter 中的 <code>categories</code> 用于文章的 URL 的。为什么呢？因为 Hugo 中的 <code>categories</code> 与 <code>tags</code> 在功能上其实是<strong class="emphasis-point">完全相同</strong>的，它们的作用都是将不同的文章联系起来。其实，Front Matter 中的 <code>categories</code> 和 <code>tags</code> 在 Hugo 中都属于 Taxonomies：</p>
+<blockquote>
+<p>Hugo includes support for user-defined taxonomies to help you demonstrate logical relationships between content for the end users of your website.</p>
+<p>— <em><a href="https://gohugo.io/content-management/taxonomies/">https://gohugo.io/content-management/taxonomies/</a></em></p>
+</blockquote>
+<p>简体中文来说🐼：「Hugo 支持用户定义的类别（taxonomies）来帮你为自己网站的读者展示文章之间的逻辑关系」。也就是说，在 Hugo 中其实你可以自定义自己想要的任何类别，而不仅限于部类（<code>categories</code>）<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>和标签（<code>tags</code>），比如：你可以自定义一个 <code>series</code>，也就是系列╱专题╱专栏。</p>
+<p>既然 Hugo 中基于 Front Matter 的部类和标签都属于类别，而类别的作用只是联系文章，部类自然不可能有树状结构，自然也不能用部类来组织文章。那么，在 Hugo 中你要怎么组织文章呢？分区（<a href="https://gohugo.io/content-management/sections/">Sections</a>）。所谓分区，即站点的 <code>content</code> 目录下的文件夹和子文件夹，一个文件夹即一个分区<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>。很明显，这是基于文件系统的结构的，自然也就支持树状╱网状╱嵌套结构，也就能够用来实现文章的树状分类。我觉得这是 Hugo 的又一个优点，直接利用起文件系统的结构来组织文章，合理且符合用户预期，Markdown 文档的存放也更有序。</p>
+<h2 id="url"><a href="#url" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>URL</h2>
+<p>迁移博客过程中最重要的莫过于保证文章的 URL 不变，不然，这将会非常不利于 SEO。好不容易有一篇文章出现在 Google 相关搜索结果的前排，却因为 URL 的变化导致原链接 404 从而导致该文章从 Google 的索引中移除，这一定会是非常令人沮丧的😶。</p>
+<p>当你从 Hexo 迁移到 Hugo 时，如果你在 Hexo 中的站点配置文件 <code>_config.yml</code> 的 <code>permalink</code> 中只使用了 <code>:year</code>、<code>:month</code>、<code>:day</code>、<code>:title</code> 变量的话，那么文章的 URL 是能够平滑地迁移到 Hugo 的，见 <a href="https://gohugo.io/content-management/urls/">URL Management</a>。同时，提醒一点，Hexo 中的文章中的 <em>Front Matter</em> 中的 <a href="../../tech/hexo-next-optimization/#%E6%96%87%E7%AB%A0%E7%9A%84%E6%A8%A1%E7%89%88%E6%96%87%E4%BB%B6"><code>permalink</code></a> 在 Hugo 中对应的是 <code>slug</code>。</p>
+<p>但是，对于某些用户（比如我）在迁移时则可能会有一些麻烦，比如在 Hexo 中使用了 <code>:category</code>、<code>:id</code>、<code>:abbrlink</code> 变量，以及 <code>.html</code> 后缀。下面就来讲讲这些情况的解决之道。</p>
+<hr>
+<p>首先就是部类，即 Categories 页面，也即 Front Matter 中的 <code>categories</code>，也即配置文件里的 <code>:category</code>。</p>
+<p>正如上文所说的，Hugo 中的部类是与标签无差别的，所以在 Hugo 中你是无法实现多级的部类的，即当你从 Hexo 迁移到 Hugo 时，<code>/categories/foo/bar/</code> 这样的链接是一定会 404 的，除非你使用 <a href="https://gohugo.io/content-management/urls/#aliases">Aliases</a>。当然，这其实也无所谓，因为重要的是文章的链接，其它页面的链接可保持也可不保持。</p>
+<p>对于文章的链接，如果你设计了复杂的多级部类（树状分类）且将之加入了文章的 URL 结构，那么在 Hugo 中保持文章 URL 中的这种结构的合理方式就是使用分区 Sections，然后在 Hugo 的配置文件 <code>config.toml</code> 中的 <code>permalinks</code> 配置相应的分区的 <code>:sections</code> 变量<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>。</p>
+<hr>
+<p>然后是 <code>.html</code> 后缀，博主当时年轻，想着加上这个显得 COOL 一点，于是添加了此参数并随着那篇教程带偏了很多人。现在接触了 Hugo，博主知道了这样的 URL 其实是<a href="https://gohugo.io/content-management/urls/#ugly-urls">很丑的</a>，所以也就不在 Hugo 中保持了。毕竟，现代的服务器都有类似的自动跳转，这意味着原链接并不会 404，故在 Hugo 中也没必要再去丑化 URL。</p>
+<p>当然，如果你还是想在 Hugo 中保持文章的 URL 的 <code>.html</code> 后缀，也不是没有办法，利用 Hugo 配置中的 <code>uglyURLs</code> 和 <a href="https://gohugo.io/templates/output-formats#configure-output-formats">Output Formats</a> 的一个配置项 <code>noUgly</code> 即可实现。首先在配置文件 <code>config.toml</code> 的<strong class="emphasis-point">顶部</strong>加上 <code>uglyURLs = true</code>，然后继续添加以下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">outputFormats</span><span class="p">.</span><span class="nx">NoUglyHTML</span><span class="p">]</span>
+    <span class="nx">mediaType</span> <span class="p">=</span> <span class="s2">&#34;text/html&#34;</span>
+    <span class="nx">noUgly</span> <span class="p">=</span> <span class="s2">&#34;true&#34;</span>
+<span class="p">[</span><span class="nx">outputFormats</span><span class="p">.</span><span class="nx">NoUglyRSS</span><span class="p">]</span>
+    <span class="nx">mediaType</span> <span class="p">=</span> <span class="s2">&#34;application/rss+xml&#34;</span>
+    <span class="nx">noUgly</span> <span class="p">=</span> <span class="s2">&#34;true&#34;</span>
+
+<span class="p">[</span><span class="nx">outputs</span><span class="p">]</span>
+    <span class="nx">page</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;HTML&#34;</span><span class="p">]</span>
+    <span class="nx">home</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;HTML&#34;</span><span class="p">,</span> <span class="s2">&#34;RSS&#34;</span><span class="p">]</span>
+    <span class="nx">section</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;NoUglyHTML&#34;</span><span class="p">,</span> <span class="s2">&#34;NoUglyRSS&#34;</span><span class="p">]</span>
+    <span class="nx">taxonomyTerm</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;NoUglyHTML&#34;</span><span class="p">,</span> <span class="s2">&#34;NoUglyRSS&#34;</span><span class="p">]</span>
+    <span class="nx">taxonomy</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;NoUglyHTML&#34;</span><span class="p">,</span> <span class="s2">&#34;NoUglyRSS&#34;</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这样就能实现<strong class="emphasis-point">仅文章</strong>的 URL 是有 <code>.html</code> 后缀的，但需要注意的是：这样是会产生一些 bugs 的——具体我就不再花时间叙述了——因此还是建议直接抛弃 <code>.html</code> 后缀。</p>
+<hr>
+<p>迁移时另外一个比较重要的 URL 问题应该是中文部类和中文标签的英文别名问题，比如你添加了一个「树莓派」标签，但你不希望该标签的 URL 是 <code>/tags/树莓派/</code>，你希望它的 URL 是英文的 <code>/tags/raspberry-pi/</code>。在 Hexo 中你可以通过站点配置文件 <code>_config.yml</code> 中的 <code>tag_map</code> 来实现，但在 Hugo 中没有这样的功能，那在 Hugo 中应该怎么办呢？</p>
+<p>首先，你需要在配置文件 <code>config.toml</code> 中配置下部类和标签的 URL 结构：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">permalinks</span><span class="p">]</span>
+    <span class="nx">categories</span> <span class="p">=</span> <span class="s2">&#34;/categories/:slug/&#34;</span>
+    <span class="nx">tags</span> <span class="p">=</span> <span class="s2">&#34;/tags/:slug/&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>然后，在你的站点根目录下的 <code>content</code> 文件夹内新建 <code>tags</code> 文件夹，并在它的里面新建一个 <code>树莓派</code> 文件夹，最后在该文件夹内新建一个 <code>_index.md</code> 文件，并加入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-t" data-lang="t"><span class="o">+</span><span class="o">+</span><span class="o">+</span>
+<span class="n"></span><span class="n">slug</span> <span class="o">=</span> <span class="s">&#34;raspberry-pi&#34;</span>
+<span class="o">+</span><span class="o">+</span><span class="o">+</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这样就解决了 URL 内的中文标签的别名问题。但还有一种特殊情况，就是你添加的标签如果比较<strong class="emphasis-point">复杂</strong><sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>，比如 <code>Raspberry Pi（树莓派）</code>。那么此时，你在 <code>tags</code> 文件夹内新建的文件夹的名字就不能是标签的名字本身，而必须是 Hugo「<a href="https://gohugo.io/functions/urlize/">链接化</a>」后的标签名，比如 <code>raspberry-pi树莓派</code>。然后，在上面添加了 <code>slug</code> 的基础上，再手动添加一行 <code>title = &quot;Raspberry Pi（树莓派）&quot;</code> 以修正标题。此外，如果你在配置文件 <code>config.toml</code> 中设置了 <code>disablePathToLower</code>，那么新建的文件夹的名字就应该是 <code>Raspberry-Pi树莓派</code>。</p>
+<p>这里再来说一说 URL 中的英文字符的大小写的问题。在 Hexo 中如果你添加一个 <code>Raspberry Pi</code> 标签，那么它的 URL 是 <code>Raspberry-Pi</code>，但在 Hugo 中它的 URL 会变成 <code>raspberry-pi</code>，即将大写字母处理成了使 URL 更美观的小写字母。这也意味着当你从 Hexo 迁移到 Hugo 时，你的一些包含大写字母的原链接会 404，如果你想避免这个情况，你可以在配置文件 <code>config.toml</code> 的<strong class="emphasis-point">顶部</strong>加上 <code>disablePathToLower = true</code>。但我还是不建议这样做，因为全小写的 URL 的确会更美观，即使这会导致原链接 404，但重要的是<strong class="emphasis-point">文章的链接</strong>，而非某一标签页面。</p>
+<p>最后，对于以上方法，我只能保证在 <a href="../../tech/documentation-of-hugo-theme-meme/">MemE</a> 主题中是正常工作的。此外，MemE 主题支持复杂的中文标签名，支持复杂的中文部类名，支持复杂的中文分区名。</p>
+<hr>
+<p>对于分区，我推荐直接使用小写英文命名，然后通过新建相应的 <code>_index.md</code> 并添加 <code>title</code> 以修正标题。当然，如果你要用中文也可以，但建议用<strong class="emphasis-point">简单</strong>的中文名。然后，如果你想要使分区的 URL 却为英文，比如：你想使「系列」分区的 URL 为 <code>/series/</code> 而非 <code>/系列/</code>，那么你需要先在「系列」文件夹下新建一个 <code>_index.md</code> 文件，然后加上以下内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-t" data-lang="t"><span class="o">+</span><span class="o">+</span><span class="o">+</span>
+<span class="n"></span><span class="n">url</span> <span class="o">=</span> <span class="s">&#34;series&#34;</span>
+<span class="o">+</span><span class="o">+</span><span class="o">+</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>最后在配置文件 <code>config.toml</code> 中配置下该分区下的文章的 URL 结构，比如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">permalinks</span><span class="p">]</span>
+    <span class="s2">&#34;系列&#34;</span> <span class="p">=</span> <span class="s2">&#34;/series/:slug/&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>对于从 Hexo 迁移到 Hugo 在 URL 上的其它情况，比如在 Hexo 中使用了 <code>:id</code> 和 <code>:abbrlink</code> 变量，那么你可以通过 <code>url</code> 在文章的 Front Matter 中直接手动指定文章的 URL，以保持文章链接的不变。</p>
+<p>当然，如果在迁移时你想重构博客文章的 URL 结构，那么可以利用 Hugo 的 <a href="https://gohugo.io/content-management/urls/#aliases">Aliases</a> 或 Netlify 的 <a href="../../tech/deploy-static-site-to-netlify/#%E6%89%A9%E5%B1%95">Redirects</a><sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup> 来保证原链接不 404。根据我的测试，这两种方式是都可以平滑地实现链接的迁移的，即不会降低文章在 Google 搜索结果中的排名。</p>
+<h2 id="其它方面"><a href="#其它方面" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>其它方面</h2>
+<p>在迁移时还会遇到一些小问题，比如：日期格式、修改时间、阅读更多、Hexo 的标签插件等等问题，下面来一一说明。</p>
+<hr>
+<p>首先是文章的 Front Matter 中的 <code>date</code> 日期格式的问题。在 Hugo 中，Hexo 默认的日期格式是不能工作的，比如：你必须要修改 <code>1969-07-20 20:17:43</code> 为 <code>1969-07-20T20:17:43+00:00</code>，即添加了时区的信息。对于这点，你可以用上文提到的那个 <a href="https://github.com/wd/hexo2hugo">Python 脚本</a>批量处理一下。</p>
+<p>然后是文章的修改时间的问题。在 Hexo 中，会自动将<strong class="emphasis-point">文件</strong>的修改时间作为<strong class="emphasis-point">文章</strong>的修改时间，但在 Hugo 中不会。不过你可以<a href="https://gohugo.io/getting-started/configuration/#configure-dates">自行配置</a><sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup>，在配置文件 <code>config.toml</code> 中加入 <code>:fileModTime</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-toml" data-lang="toml"><span class="p">[</span><span class="nx">frontmatter</span><span class="p">]</span>
+    <span class="nx">lastmod</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;lastmod&#34;</span><span class="p">,</span> <span class="s2">&#34;:git&#34;</span><span class="p">,</span> <span class="s2">&#34;:fileModTime&#34;</span><span class="p">,</span> <span class="s2">&#34;:default&#34;</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如此，就算你没有在文章的 Front Matter 中手动指定修改时间 <code>lastmod</code>，它依然会随着你的文章的改动或修改而「自动更新」。</p>
+<hr>
+<p>在 Hexo 中，你可能会在 Markdown 中使用 <a href="https://hexo.io/zh-cn/docs/tag-plugins.html">Hexo 标签插件</a>来实现一些 Markdown 语法无法实现的特殊排版需求。这些特殊的语法是无法在 Hugo 中生效的，尽管在 Hugo 中有与之对应的<a href="https://gohugo.io/content-management/shortcodes/">短代码</a>，但它们之间的语法是不同的，故我建议最好放弃这种非 <a href="https://daringfireball.net/projects/markdown/syntax">Markdown 原生语法</a>的写法。当然，如果你非要手动将之从 Hexo 迁移到 Hugo 中也不是没有可能，比如：你可以用 <a href="https://github.com/martignoni/hugo-notice">hugo-notice</a> 实现 NexT 主题的 <a href="https://theme-next.org/docs/tag-plugins/note">Note 标签</a>。</p>
+<p>此外，对于文章摘要的截取，即「阅读更多」上方的内容。在 Hexo 中你可以在文章中加入 <code>&lt;!-- more --&gt;</code> 来控制，但这在 Hugo 中是不会生效的，在 Hugo 中你必须将空格删除，即 <a href="https://gohugo.io/content-management/summaries/#manual-summary-splitting"><code>&lt;!--more--&gt;</code></a>。</p>
+<p>还有一个是 <code>index.md</code> 的问题，在 Hugo 中你必须在它的前面添加一个下划线，即 <code>_index.md</code>。比如：你想自定义标签页面的标题为中文，那么你先在新建一个 <code>content/tags/_index.md</code> 文件，然后在文件中加入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-t" data-lang="t"><span class="o">+</span><span class="o">+</span><span class="o">+</span>
+<span class="n"></span><span class="n">title</span> <span class="o">=</span> <span class="s">&#34;标签&#34;</span>
+<span class="o">+</span><span class="o">+</span><span class="o">+</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>在 Hexo 中，你每对文章进行一次修改，你就必须要在浏览器中手动刷新一下页面，如此才能看到最新的渲染结果🐶。但在 Hugo 中，只要有相关变化，Hugo 就会自动为你刷新页面。也就是说，你可以即时预览😎！顺便安利一个有用的技巧，在配置文件<strong class="emphasis-point">上方</strong>添加 <code>newContentEditor = &quot;gedit&quot;</code>（修改 <code>gedit</code> 为你喜欢的编辑器名），就可以在每次 <code>hugo new</code> 新建文章后自动打开你喜欢的文本编辑器！</p>
+<p>在 Hugo 中，与 <code>hexo s</code> 命令等同的是 <code>hugo server</code>，但由于默认的<a href="https://gohugo.io/content-management/archetypes/">文章模板</a>里面有 <code>draft: true</code>，故需加上 <code>-D</code> 参数以渲染草稿；与 <code>hexo g</code> 命令等同的是 <code>hugo</code>，用来生成 <code>public</code> 文件夹；与 <code>hexo clean</code> 类似的命令是 <code>hugo --gc --cleanDestinationDir</code>；在 Hugo 中可以直接使用 <code>hugo --minify</code> 压缩 HTML、JS、CSS 等文件；在 Hugo 中，没有 <code>hexo d</code> <a href="https://hexo.io/zh-cn/docs/one-command-deployment">一键部署</a> <code>public</code> 文件夹到 GitHub 的操作，你需要自己<a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/">新建脚本</a>，但我建议使用 Git 管理整个站点，然后上传整个站点到 GitHub 以通过<a href="../../tech/host-your-blog-on-ipfs/">持续集成</a>的方式部署，而非用 Git 直接部署 <code>public</code> 生产版代码，因为这其实是非常可笑的——Git 是用来管理源码的。此外，关于 <code>hugo</code> 命令的更多参数，请见 <a href="https://gohugo.io/commands/">Commands</a>。</p>
+<p>最后，Hugo 默认是渲染到内存的，如果你有一些特殊情况要调试，比如 <a href="../../tech/pwa-via-workbox/">Service Worker</a>，那么你可以通过使用 <code>--renderToDisk</code> 参数渲染到硬盘来实现调试。此外，如果你有一个厚重的 <code>static</code> 文件夹（比如有大量图片或视频），那么也可以使用该参数以渲染到硬盘。不然，Hugo 可能会吃光你的电脑内存🤪。</p>
+<hr>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>当然，你也可以将它拆分开来，见：<a href="https://gohugo.io/getting-started/configuration/">https://gohugo.io/getting-started/configuration/</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>下文的 TOML 代码中的缩进仅为美观和提高代码的可读性。 <a href="#fnref:2" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>来自：<a href="https://hexo.io/zh-cn/docs/permalinks.html">https://hexo.io/zh-cn/docs/permalinks.html</a> <a href="#fnref:3" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>为了在中文上将 Categories 和 Taxonomies 与广义的分类区分开来，今后一例将 Categories 翻译为「部类」，将 Taxonomies 翻译为「类别」。 <a href="#fnref:4" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>需注意的是子文件夹内必须有 <code>_index.md</code>，否则 Hugo 不会认为该子文件夹为一个分区，见：<a href="https://gohugo.io/content-management/sections/#nested-sections">https://gohugo.io/content-management/sections/#nested-sections</a> <a href="#fnref:5" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>Hugo 默认的分区的 URL 结构 <code>/:sections/:slug/</code> 就有 <code>:sections</code> 变量，但如果你要添加其它变量，则需添加它。 <a href="#fnref:6" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7" role="doc-endnote">
+<p>即有空格、标点符号，或其它特殊符号。 <a href="#fnref:7" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:8" role="doc-endnote">
+<p>如果你的博客部署在 Netlify 上的话。 <a href="#fnref:8" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:9" role="doc-endnote">
+<p>在 Hugo 中，你甚至可以配置 Git 的改动（commit）时间为文章的修改时间，即 <code>:git</code>。 <a href="#fnref:9" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+</div>
+
+        </article>
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+    <footer class="minimal-footer">
+        
+            
+            <div class="post-tag"><a href="../../tags/hugo/" rel="tag" class="post-tag-link">#hugo</a> <a href="../../tags/hexo/" rel="tag" class="post-tag-link">#hexo</a></div>
+        
+        
+            <div class="post-category">
+                <a href="../../tech/" class="post-category-link active">tech</a> | <a href="../../life/" class="post-category-link">life</a>
+            </div>
+        
+        
+    </footer>
+
+
+        
+
+        
+
+        
+
+    </div>
+</main>
+
+            
+    <div id="back-to-top" class="back-to-top">
+        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon"><path d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"/></svg></a>
+    </div>
+
+            
+        </div>
+        <script src="../../js/meme.min.10b69ef81544b96691de93039f8eeb6403f8a00b15efb5a7d14f327d2fbd5c99.js" integrity="sha256-ELae+BVEuWaR3pMDn47rZAP4oAsV77Wn0U8yfS+9XJk=" data-no-instant></script>
+
+
+    <script data-no-instant>InstantClick.init();</script>
+
+
+    <script data-no-instant>
+        InstantClick.on('change', function () {
+            backToTop();
+        });
+    </script>
+
+
+
+    <script data-no-instant>
+        InstantClick.on('change', function () {
+            const userPrefers = localStorage.getItem('theme');
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const lightModeMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+            if (userPrefers === "dark") {
+                changeModeMeta("dark");
+                changeMode("🌙", "chroma", "chroma-dark");
+            } else if (userPrefers === "light") {
+                changeModeMeta("light");
+                changeMode("🌞", "chroma-dark", "chroma");
+            } else if (darkModeMediaQuery.matches) {
+                changeModeMeta("dark");
+                changeMode("🌙", "chroma", "chroma-dark");
+            } else if (lightModeMediaQuery.matches) {
+                changeModeMeta("light");
+                changeMode("🌞", "chroma-dark", "chroma");
+            }
+        });
+    </script>
+<script data-no-instant>
+            InstantClick.on('change', function () {
+                gtag('config', 'UA-100434861-1', {
+                    'page_path': location.pathname + location.search
+                });
+            });
+        </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+
+<script>
+    var scroll = new SmoothScroll('a[href*="#"]', {
+        speedAsDuration: true
+    });
+</script>
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist/medium-zoom.min.js"></script>
+
+<script>
+    mediumZoom('[data-zoomable]', {
+        background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)'
+    })
+</script>
+
+
+
+
+    <div class="app-refresh" id="app-refresh">
+        <div class="app-refresh-wrap" onclick="location.reload()">
+            <label>已更新最新版本</label>
+            <span>点击刷新</span>
+        </div>
+    </div>
+
+    <script>
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('../../sw.js')
+            .then(reg => {
+                reg.addEventListener('updatefound', () => {
+                    newWorker = reg.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed') {
+                            if (navigator.serviceWorker.controller) {
+                                showNotification();
+                            }
+                        }
+                    });
+                });
+            });
+        }
+        
+        function showNotification() {
+            document.querySelector('meta[name=theme-color]').content = '#000';
+            document.getElementById('app-refresh').className += ' app-refresh-show';
+        }
+    </script>
+
+
+
+
+
+
+
+    </body>
+</html>

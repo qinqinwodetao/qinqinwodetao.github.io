@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-US">
+    <title type="text">vkill</title>
+    <subtitle type="html">Blog of reuixiy in English.</subtitle>
+    <updated>2020-01-13T23:43:33+08:00</updated>
+    <id>https://vkill.com/en-us/</id>
+    <link rel="alternate" type="text/html" href="https://vkill.com/en-us/" />
+    <link rel="self" type="application/atom+xml" href="https://vkill.com/en-us/atom.xml" />
+    <author>
+            <name>wucy</name>
+            <uri>https://vkill.com/en-us/</uri>
+            
+                <email>wucy1991@gmail.com</email>
+            </author>
+    <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</rights>
+    <generator uri="https://gohugo.io/" version="0.62.2">Hugo</generator>
+</feed>

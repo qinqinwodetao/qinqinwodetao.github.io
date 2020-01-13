@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <url>
-    <loc>https://example.com/about/</loc>
-    <lastmod>2020-01-09T00:12:30+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.com/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>https://example.com/</loc>
-  </url>
-  
-  <url>
-    <loc>https://example.com/tags/</loc>
-  </url>
-  
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	
+	<sitemap>
+	   	<loc>https://vkill.com/zh-cn/sitemap.xml</loc>
+		
+	   	<lastmod>2020-01-13T22:52:54+08:00</lastmod>
+		
+	</sitemap>
+	
+	<sitemap>
+	   	<loc>https://vkill.com/en-us/sitemap.xml</loc>
+		
+	</sitemap>
+	
+</sitemapindex>

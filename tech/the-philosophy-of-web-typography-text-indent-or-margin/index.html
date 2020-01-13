@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+    <head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#">
+    <meta charset="UTF-8" /><meta name="theme-color" content="#1c1c21" />
+        <script>
+            const userPrefers = localStorage.getItem('theme');
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const lightModeMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+            if (userPrefers === "dark") {
+                changeModeMeta("dark");
+            } else if (userPrefers === "light") {
+                changeModeMeta("light");
+            } else if (darkModeMediaQuery.matches) {
+                changeModeMeta("dark");
+            } else if (lightModeMediaQuery.matches) {
+                changeModeMeta("light");
+            }
+            function changeModeMeta() {
+                document.documentElement.setAttribute('data-theme', arguments[0]);
+                if (arguments[0] === "dark") {
+                    changeThemeColor("#1c1c21");
+                } else {
+                    changeThemeColor("#fff");
+                }
+            }
+            function changeThemeColor() {
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', arguments[0]);
+            }
+        </script>
+
+    
+        
+        
+        <script>
+            if (window.location.host == "vkill.com" && window.location.protocol != "https:") {
+                window.location.protocol = "https";
+            }
+        </script>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    
+    <meta name="renderer" content="webkit" />
+
+    <meta name="generator" content="Hugo 0.62.2" />
+
+    <title>网页字体排版的哲学：段首缩排或段间距 | vkill</title>
+
+    <link rel="stylesheet" href="../../css/meme.min.7a07eed0b3e1535d38185b2b8372c41fd93789db72b0fa04d1a967047ffbf1e9.css" integrity="sha256-egfu0LPhU104GFsrg3LEH9k3idtysPoE0alnBH/78ek=" data-instant-track />
+
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700,700i|Noto+Serif+SC:400,700|Source+Code+Pro:400,400i,700,700i|Cinzel+Decorative:700&display=swap&subset=chinese-simplified" rel="stylesheet" />
+
+    <meta name="author" content="wucy" />
+    
+    
+    <meta name="description" content="写在前面 首先声明：本人非印刷行业的专业人士，也非网页设计的专业人士，故这系列博文全当……" />
+    <meta name="keywords" content="typography, philosophy" />
+    
+    <link rel="shortcut icon" type="image/ico" href="../../favicon.ico" />
+    <link rel="mask-icon" href="../../icons/safari-pinned-tab.svg" color="#2a6df4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="vkill" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="vkill" />
+    <meta name="msapplication-starturl" content="../../" />
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="../../icons/mstile-150x150.png" />
+    <link rel="manifest" href="../../manifest.json" />
+
+    
+    
+
+    
+    <link rel="canonical" href="https://vkill.com/tech/the-philosophy-of-web-typography-text-indent-or-margin/" />
+
+
+
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "datePublished": "2018-09-05T21:40:48+08:00",
+        "dateModified": "2020-01-13T22:52:54+08:00",
+        "url": "https://vkill.com/tech/the-philosophy-of-web-typography-text-indent-or-margin/",
+        "headline": "网页字体排版的哲学：段首缩排或段间距",
+        "description": "写在前面 首先声明：本人非印刷行业的专业人士，也非网页设计的专业人士，故这系列博文全当……",
+        "keywords": "typography, philosophy",
+        "inLanguage" : "zh-CN",
+        "articleSection": "tech",
+        "wordCount":  4521 ,
+        "image": ["https://vkill.com/images/the-philosophy-of-web-typography-text-indent-or-margin.png","https://vkill.com/images/the-philosophy-of-web-typography-user-agent-stylesheet.png"],
+        "author": {
+            "@type": "Person",
+            "description": "happy wife, happy life",
+            "email": "wucy1991@gmail.com",
+            "image": "https://vkill.com/icons/apple-touch-icon.png",
+            "url": "https://vkill.com/",
+            "name": "wucy"
+        },
+        "license": "在保留本文作者及本文链接的前提下，非商业用途随意转载分享。",
+        "publisher": {
+            "@type": "Organization",
+            "name": "vkill",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://vkill.com/icons/apple-touch-icon.png"
+            },
+            "url": "https://vkill.com/"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebSite",
+            "@id": "https://vkill.com/"
+        }
+    }
+</script>
+
+    
+
+
+
+<meta name="twitter:card" content="summary_large_image" />
+
+
+<meta name="twitter:site" content="@wucy" />
+<meta name="twitter:creator" content="@wucy1991" />
+
+    
+
+
+
+
+
+
+<meta property="og:title" content="网页字体排版的哲学：段首缩排或段间距" />
+<meta property="og:description" content="写在前面 首先声明：本人非印刷行业的专业人士，也非网页设计的专业人士，故这系列博文全当……" />
+<meta property="og:url" content="https://vkill.com/tech/the-philosophy-of-web-typography-text-indent-or-margin/" />
+<meta property="og:site_name" content="vkill" />
+<meta property="og:locale" content="zh-CN" />
+            <meta property="og:locale:alternate" content="en-US" />
+        <meta property="og:image" content="https://vkill.com/images/the-philosophy-of-web-typography-text-indent-or-margin.png" />
+<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2018-09-05T21:40:48+08:00" />
+    <meta property="article:modified_time" content="2020-01-13T22:52:54+08:00" />
+    
+    <meta property="article:section" content="tech" />
+    <meta property="article:tag" content="typography, philosophy" />
+
+        
+
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-100434861-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-100434861-1');
+    </script>
+
+
+
+
+    
+</head>
+
+    <body>
+        <div class="container">
+            
+    <header class="header">
+        <div class="site-brand">
+            
+            <a href="../../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66.146 26.458" class="brand"><path d="M58.216 17.03v-2.505c1.084 0 3.793.067 5.351.225l.068-.067c-.045-.204-.068-.655-.068-.858 0-.204.023-.633.068-.836l-.068-.067c-1.332.112-2.687.225-5.35.225V11.5c0-.384.022-2.438.18-2.98 3.025 0 6.457.27 6.457.27l.045-.09c-.022-.18-.045-.722-.045-.925 0-.18 0-.474.045-.79l-.045-.068c-.361.045-.88.068-1.355.068h-6.863c-.768 0-1.897-.068-1.897-.068l-.045.068c.18 1.287.271 2.822.271 4.515v5.532c0 1.693-.09 3.296-.27 4.515l.022.068s1.129-.068 1.919-.068h7.09c.473 0 .993.023 1.354.068l.045-.068c-.045-.293-.045-.587-.045-.813 0-.225.022-1.06.045-1.241l-.045-.09s-3.658.496-6.683.496c-.158-.542-.18-2.483-.18-2.867zm-20.694-3.363l-.113-.068c0-.497-.022-1.445-.045-1.648-.045-.136-.068-.226-.203-.226-.655.113-2.123.113-2.913.068l-.045.067c.158.971.248 2.71.248 4.38v1.242c0 1.694-.09 2.845-.27 4.064l.022.068s.948-.068 1.739-.068c.767 0 1.67.068 1.67.068l.045-.068c-.18-1.287-.225-2.348-.225-4.064v-2.28c.948-1.152 1.76-1.829 2.393-1.829.858 0 1.332.316 1.332 1.829v2.28c0 1.694-.09 2.845-.27 4.064l.022.068s1.016-.068 1.806-.068c.767 0 1.648.068 1.648.068l.045-.068c-.18-1.287-.27-2.348-.27-4.064v-1.987c0-.316 0-.406-.023-.677 1.083-1.197 1.58-1.445 2.46-1.445.723 0 1.242.497 1.242 2.01v2.1c0 1.693-.09 2.844-.27 4.063l.022.068s1.016-.068 1.806-.068c.768 0 1.648.068 1.648.068l.046-.068c-.181-1.287-.271-2.348-.271-4.064v-2.258c0-2.257-.79-3.59-3.229-3.59-1.129 0-2.303.452-3.59 1.807-.451-1.129-1.084-1.806-3.093-1.806-1.106 0-2.506.925-3.364 2.032zm-12.436 2.122c.068-1.106.339-1.874.677-2.348a1.645 1.645 0 0 1 1.377-.677c.904 0 1.468 1.06 1.468 3.025zm6.209 3.341c-1.061.858-2.145.926-3.093.926-1.107 0-1.92-.293-2.461-.88-.497-.542-.745-1.332-.745-2.371h2.235c2.258 0 4.2.045 4.2.045l.135-.135c0-2.823-.79-5.08-4.268-5.08-1.241 0-2.596.406-3.5 1.129-1.083.903-1.828 2.28-1.828 4.131 0 1.332.474 2.755 1.423 3.703.767.813 2.1 1.174 3.793 1.174 1.625 0 3.228-.52 4.47-1.942 0-.293-.135-.7-.361-.7zM4 6.803c-.835 4.832-2.032 10.499-2.98 14.811.248-.068.767-.068 1.038-.068.249 0 1.016 0 1.265.068.067-2.37.632-7.157 1.241-10.68l.068.023a153.476 153.476 0 0 1 4.29 10.59h1.445c1.648-3.749 3.454-7.135 5.373-10.612h.068c.43 3.567.723 6.931 1.039 10.679.338-.068 1.422-.068 1.76-.068.34 0 1.31 0 1.649.068-.7-4.9-1.197-9.257-1.784-14.811h-2.009L10.82 17.302h-.09c-1.784-3.568-3.094-6.864-4.426-10.499z"/></svg></a>
+            
+        </div>
+    </header>
+
+            
+            <div class="lang-toggle" onmouseover="langSwitcherOver()" onmouseout="langSwitcherOut()" data-hide="true">
+        🇨🇳
+        
+            
+        
+    </div>
+
+            
+    
+        
+            
+        
+        <div id="theme-toggle" onclick="modeSwitcher()" data-hide="true">🌙</div>
+    
+
+            
+    <main class="main single" id="main">
+    <div class="main-inner">
+
+        <article class="content post" data-align="justify" data-type="tech">
+
+            <h1 class="post-title">网页字体排版的哲学：段首缩排或段间距</h1>
+
+            
+                <div class="post-subtitle">一种对网页字体排版的哲学沉思</div>
+            
+
+            
+                
+            
+
+            
+
+            <div class="post-body"><p><img src="../../images/the-philosophy-of-web-typography-text-indent-or-margin.png" alt="the-philosophy-of-web-typography-text-indent-or-margin.png"></p>
+<h2 id="写在前面"><a href="#写在前面" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>写在前面</h2>
+<p style="text-indent:0"><span class="drop-cap">首</span>先声明：本人非印刷行业的专业人士，也非网页设计的专业人士，故这系列博文全当本人的个人消遣。</p>
+<p>写这系列文章的直接原因是发现很多中文网页的字体排版实在是不忍直视，甚至博客也是如此，故打算写一写这方面的博文。主要原因是目前网上缺乏这方面的文章，或者这方面的知识尚未普及，而它却关系到我们每人每天都在阅读和输入的文字，其重要性不言而喻。故本人希望借此系列文章来普及一下这方面的知识，即使可能只是微薄之力，毕竟本人只是一个外行人。</p>
+<p>然而，如果说主要原因之上还有个根本原因，那本人写这系列文章的根本原因：作为一个爱哲学的人，本人想探索一下网页字体排版的<strong class="emphasis-point">本质规定性</strong>。因此，对于此系列文章，希望读者对其正误有自己的思考。</p>
+<p>另外，尽管文中有部分技术细节，但读懂此系列文章无需 HTML 与 CSS 基础，甚至无需任何计算机知识基础。</p>
+<h2 id="系列前言"><a href="#系列前言" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>系列前言</h2>
+<p>自写博客一年多来，虽然优秀的文章没有写几篇，但却了解了一些 Web 前端的知识。这些知识是本人在博客建设中的有力工具，而作为一个追求完美的人，博客建设中最令人犯愁的莫过于排版。</p>
+<p>首先，排版是一个很大的学问，所以在写之前先界定个范围。此系列博文主要是关于网页中文字体排版，什么意思呢？</p>
+<ol>
+<li>「网页」意味着 CSS；</li>
+<li>「中文」意味着不谈英文；</li>
+<li>「字体」意味着不谈页面。</li>
+</ol>
+<p>然而，「排版」必然会受到各方面的影响，所以还是会涉及部分上面的「不谈」部分。另外，CSS 的应用已经不止网页，几乎你现在所见的各种中文字体排版都离不开 CSS，它的影响也远不止于网页。因此，可以说此系列适用于与中文字体排版有关的各种，比如：电子书、微信文章排版、Word 文章排版等等。</p>
+<p>题外话：目前中文电子书的排版简直是一片混乱之地。即使你用 Kindle，且电子书来自 Amazon，大部分直接打开后还是不忍直视。此外，虽然 Kindle 能够对电子书进行一些基本调整，但由于电子书排版的不统一，导致同时阅读多本电子书时，需要频繁重复设置以达到一致的阅读效果。若无意外，本人之后应该会特别写一篇《在 Kindle 上优雅地阅读》，在此先打住。</p>
+<p>此系列博文包括但不限于：</p>
+<ol>
+<li>分段样式；</li>
+<li>标点符号；</li>
+<li>字体选择；</li>
+<li>各种数字；</li>
+<li>特殊样式。</li>
+</ol>
+<p>另外，本人的一些实践都会在本博客和我的<a href="https://yixiuer.me/">另一个博客</a>上体现。</p>
+<h2 id="系列核心"><a href="#系列核心" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>系列核心</h2>
+<p>先提一个看起来很傻的问题：为什么标题与段落的样式要有所区别？「因为名称不同，」你可能会答，「试想标题与段落的样式一样，正如一对双胞胎，那怎么分辨呢？」这个回答是无误的，但不够犀利，或者说只停留在了表象。深究一下问题本身，即：为什么要在「段落」之上另起「标题」？因为表达需求。</p>
+<p>无论是哪种字体排版样式，它都是表达需求的表现形式。如果说现在是果，那么历史就是因，我们可以通过回顾历史来寻找原因。从网页开始，沿着时间轴逆行，越过纸质书，来到原始的手写，一个「<a href="https://t.me/yixiuer/243">双重历史</a>」。第一重，从印刷回溯到手写；第二重，从打字回溯到手写。我们虽是第一重的客体，但也是第二重的主体，回溯到在纸上书写时，这是我们都有过的体验。当自己在纸上书写时，标题与段落之间的样式肯定会有所区别，比如标题是居中。这就是表达需求的主观解释，每个人都能自行体验。</p>
+<p>逆行一下，上文是从排版样式回溯到表达需求，我们也可以尝试从表达需求回归到排版样式。正如需强调一个词时，就用粗体来表现，行文上有一个表达需求，排版上就要将这个表达需求表现，即排版样式。这意味着在讨论字体排版样式前，必须先回溯表达需求，然后再结合<strong class="emphasis-point">表现要求</strong>谈排版样式的美观问题，而不是凭主观美感空谈。</p>
+<h2 id="分段样式"><a href="#分段样式" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>分段样式</h2>
+<p>本节主要探讨分段的两种排版样式：段首缩排与段间距。</p>
+<h3 id="现状概述"><a href="#现状概述" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>现状概述</h3>
+<p>为什么先说这个呢？因为这似乎是网页上字体排版的空白区，很多网站的分段的排版样式都是段间距 + 段首缩排，不忍直视。其实，这是没明白分段的表达需求，在网页默认的段间距排版的基础上硬加段首缩排，极其荒谬。</p>
+<h3 id="表达需求"><a href="#表达需求" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>表达需求</h3>
+<p>字体排版样式都是表达需求的表现形式，所以在讨论分段的排版样式之前，必须先回溯分段的表达需求。为什么有分段这个表达需求呢，或者说为什么要分段，什么情况就要分段呢？印象中这应该是小学老师教授过的内容，大家应该都有所理解，个人理解：</p>
+<ol>
+<li>内容不直接相关；</li>
+<li>上下是并列关系；</li>
+<li>逻辑有一定转折。</li>
+</ol>
+<p>也许还有其它方面，但其根本是前后不连续，不管是内容、逻辑。因此对于这个表达需求，在排版样式上则表现为将段落分离开来，即一种分段标识。另有一种<strong class="emphasis-point">特殊情况</strong>，如果不连续的程度很大，段落的分离程度也要更大，即一种分段停顿。</p>
+<h3 id="排版样式"><a href="#排版样式" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>排版样式</h3>
+<p>要将段落分离开来，有两种合理的排版样式：段首缩排与段间距。两种样式的区别：</p>
+<ul>
+<li>段首缩排，段首缩进两字符，段间距等于行间距。</li>
+<li>段间距式，段首不进行缩进，段间距大于行间距。</li>
+</ul>
+<p>在网页中，段落用 <code>&lt;p&gt;</code> 表示，行间距即 <code>line-height</code>，段间距可以用 <code>margin</code> 控制，段首缩排用 <code>text-indent</code> 实现。</p>
+<p>怎么评价这两种样式呢？段首缩排在「<a href="https://yixiuer.me/notes/we/">一统王国</a>」也许会被禁止，因为它使页面的左边变成了一条曲折的线，不符合最智慧的线——直线。也就是说，其实从美观角度，段首缩排是一种<strong class="emphasis-point">畸形排版</strong>，因为它违背了基本的对齐原则，而遵守这一原则的段间距则使页面显得整齐。但是，段首缩排似乎一直是书籍印刷的标准段落排版样式，难道印刷行业一直错了？</p>
+<p>这时，我们就要考虑<strong class="emphasis-point">表现要求</strong>。书籍印刷的表现要求是专注文字内容，因此阅读体验应当置于美观之上。由于段间距比段首缩排的分离程度更大，一字连一字阅读时易产生隔阂感、停顿感，故段首缩排与之相比更为优雅，有着更好的阅读体验。</p>
+<p>对于网页，与纸质书的翻页不同，它是竖直方向的连续滚动。当网页快速滚动时，就使段落上下相连的段首缩排显得繁密易懵，而段落上下间隔的段间距则显得结构简明。在这个快速滚动的互联网时代，段间距也就比段首缩排更适合于网页，因为它更利于快速传达信息。</p>
+<p>对于诗歌，左边对齐的段间距排版更适合它。首先，如果称诗歌的「节」为「段」的话，与长文章不同，诗歌的每句很短，每段也很短。当采用段首缩排时，左边不对齐的美观问题将会变得格外突出。其次，诗歌注重意境，对于意境的想象，留白较大的段间距排版更为优雅。</p>
+<p>最后，对于分段需求的特殊情况——分段停顿，由于其不连续的程度很大，因此应当采用分离程度更大的段间距排版，而非段首缩排。另外，从美观角度，段首缩进四个字符是不忍直视的。</p>
+<hr>
+<p>下面给出几种排版样式的模拟情形（第 2 行表示的是上一段落的结尾），大家可以自行感受。</p>
+<p>段间距：</p>
+<pre><code>-----------------------------
+嗯，嗯，嗯。——
+
+啊！？
+
+嗯，嗯，嗯，……
+-----------------------------
+</code></pre><p>段首缩排：</p>
+<pre><code>-----------------------------
+嗯，嗯，嗯。——
+嗯？嗯？嗯，……
+-----------------------------
+</code></pre><p>段间距 + 段首缩排：</p>
+<pre><code>-----------------------------
+嗯，嗯，嗯。——
+
+啊！？
+
+嗯？嗯？嗯，……
+-----------------------------
+</code></pre><p>单纯另起一行：</p>
+<pre><code>-----------------------------
+嗯，嗯，嗯，嗯，嗯，嗯，嗯，嗯，嗯。
+嗯？嗯？嗯？嗯？嗯？噢！
+-----------------------------
+</code></pre><h3 id="排版建议"><a href="#排版建议" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>排版建议</h3>
+<p>那么网页的分段样式究竟是段间距，还是段首缩排？下面说说本人的排版应用建议。</p>
+<p>1）如果是技术文档、技术文章、新闻资讯、网络小说等，要的只是将信息迅速传达给读者，果断段间距排版，简明。</p>
+<p>2）如果是逻辑严密、联系紧密，以及文学性强的文章，首选段首缩排，阅读体验更好、优雅。</p>
+<p>3）如果是诗歌，建议段间距排版，理由见上文。</p>
+<p>注意：<strong class="emphasis-point">千万不要同时用段首缩排和段间距</strong>！</p>
+<h3 id="技术细节"><a href="#技术细节" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>技术细节</h3>
+<p>从技术角度来说，段首缩排的实现要比段间距麻烦，因为浏览器自带的默认样式（user agent stylesheet）的分段样式就是段间距排版。这就导致一行段首缩排 CSS 代码可能要另外的许多行来弥补，而段间距却无需添加其它代码。</p>
+<p>为什么浏览器自带的默认样式是段间距排版呢？待考。暂时先用本文上面的分析大胆猜测一下：因为网页是滚动而非翻页。为什么网页是滚动的呢？待考。也可先大胆猜测一下：技术上实现起来简单。</p>
+<p><img src="../../images/the-philosophy-of-web-typography-user-agent-stylesheet.png" alt="the-philosophy-of-web-typography-user-agent-stylesheet.png"><span class="caption">◎ user agent stylesheet</span></p>
+<p>为什么说段首缩排的实现要比段间距麻烦呢？解释之前先了解下网页的基本知识，如下面一段 HTML 代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">h1</span><span class="p"></span><span class="p">&gt;</span>纯文本<span class="p">&lt;</span><span class="p">/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>纯文本<span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>纯文本<span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>纯文本<span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>先解释下，<code>&lt;h1&gt;</code> 开头的是标题，<code>&lt;p&gt;</code> 开头的是段落，后面加上 <code>/</code> 表示结尾，将相应纯文本包裹住。</p>
+<p>如果你之前没有接触过网页，你可能有这个疑问：是「标题」直接写大来不就行了？这就是人脑与计算机的差别了，计算机的处理方式是化繁为简、普通到特殊，分步多流程处理。为什么你在 Word 编辑文字时，只能先输入纯文本，然后再添加样式，而无法直接输入带样式的文本？原因就在这，对于文本来说，无任何特殊样式的纯文本更适合计算机处理，至于样式则靠另外的流程实现。</p>
+<p>回到上面那段代码，黑色中文左右的英文是什么？正如分辨人要靠不同的名字，英文就是标题与段落在 HTML 中的名字。为什么标题就是 <code>h1</code>，段落就是 <code>p</code>，还要用 <code>&lt;&gt;</code> 包裹？如英语中的语法，这就是 HTML 的语法。</p>
+<p>然而，一段这样的 HTML 代码不会有任何样式，样式要靠另外的流程实现，这一流程有着另一种语法，也就是 CSS，如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-css" data-lang="css"><span class="nt">h1</span> <span class="p">{</span>
+    <span class="k">font-size</span><span class="p">:</span> <span class="mi">2</span><span class="kt">em</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">p</span> <span class="p">{</span>
+    <span class="k">font-size</span><span class="p">:</span> <span class="mi">1</span><span class="kt">em</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>h1</code> 与 <code>p</code> 是不是很眼熟？没错，就是 HTML 中的标题与段落的名字，通过不同名字控制不同样式；<code>em</code> 是一种长度单位，如常见的 <code>m</code>（米）；至于代码中的其它内容，是由 CSS 的语法决定的。上面这段代码的含义就是：</p>
+<ol>
+<li>标题字体大小为 2em；</li>
+<li>段落字体大小为 1em。</li>
+</ol>
+<p>将 HTML 与 CSS 写到一起，再加上 HTML 一些另外的语法，就能组成一张基本网页：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p"></span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p"></span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">style</span><span class="p"></span><span class="p">&gt;</span>
+        <span class="nt">h1</span> <span class="p">{</span>
+            <span class="k">font-size</span><span class="p">:</span> <span class="mi">2</span><span class="kt">em</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nt">p</span> <span class="p">{</span>
+            <span class="k">font-size</span><span class="p">:</span> <span class="mi">1</span><span class="kt">em</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">&lt;</span><span class="p">/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p"></span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p"></span><span class="p">&gt;</span>纯文本<span class="p">&lt;</span><span class="p">/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>纯文本<span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>纯文本<span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p"></span><span class="p">&gt;</span>纯文本<span class="p">&lt;</span><span class="p">/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="p">/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>显示效果可以<a href="../../demo.html" target="_blank" rel="noopener">点这里</a>在线查看。</p>
+<hr>
+<p>接下来就是段间距与段首缩排的技术细节。</p>
+<p>段首缩排：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-css" data-lang="css"><span class="nt">p</span> <span class="p">{</span>
+    <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span> <span class="c">/* 覆盖浏览器自带的默认样式 */</span>
+    <span class="k">text-indent</span><span class="p">:</span> <span class="mi">2</span><span class="kt">em</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>段间距式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-css" data-lang="css"><span class="c">/* 浏览器自带的默认样式，无需添加其它代码 */</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可去上面所说的那个页面在线编辑，自行尝试。</p>
+<p>另外，可能有疑问：不就多了两行代码，段首缩排的实现不比段间距麻烦多少啊？嘿嘿，请注意我们要排版的是整个网页，而不仅仅是段落，还包括标题、引用、列表等等，而它们的默认样式（user agent stylesheet）是与段间距排版适配的。也就是说，更改分段样式为段首缩排，就要更改其它的很多项来适配。不过，这不属于本文的内容，但未来会在此系列一一说明，敬请期待。</p>
+<h2 id="references--resources"><a href="#references--resources" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>References &amp; Resources</h2>
+<p>字体排版：</p>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Canons_of_page_construction">Canons of page construction | Wikipedia</a></li>
+<li><a href="https://www.zhihu.com/question/27391851/">怎样才能被称作是美观的排版？ | 知乎</a></li>
+<li><a href="https://www.zhihu.com/question/20360591/">1961 年企鹅出版社封面 Marber Grid（马伯栅格）是怎样被设计出来的？ | 知乎</a></li>
+<li><a href="https://internetingishard.com/html-and-css/web-typography/">Web Typography Tutorial | HTML &amp; CSS Is Hard</a></li>
+<li><a href="https://practicaltypography.com/">Butterick’s Practical Typography</a></li>
+<li><a href="https://wanderer.tw/%E7%B0%A1%E5%96%AE%E5%81%9A%E5%A5%BD%E4%B8%AD%E6%96%87%E6%8E%92%E7%89%88/">十项让长文章更容易阅读的原则 | 董福兴</a></li>
+<li><a href="https://www.w3.org/TR/clreq/">中文排版需求 | W3C</a></li>
+<li><a href="https://hanzi.pro/manual/zhangjie_de_bianpai">章节的编排 | 汉字标准格式</a></li>
+<li><a href="http://bewho.us/mindmeters/why-indent-in-the-first-paragraph/">为什么要段首空两格 | 微物之神</a></li>
+</ol>
+<p>符号：</p>
+<ol>
+<li><a href="http://www.moe.gov.cn/ewebeditor/uploadfile/2015/01/13/20150113091548267.pdf">标点符号用法 | 中华人民共和国国家标准</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%A0%87%E7%82%B9%E7%AC%A6%E5%8F%B7">标点符号 | 维基百科</a></li>
+<li><a href="https://type.cyhsu.xyz/2018/07/a-guide-to-compositions-2/">疑难符号使用与输入指南 | Neverland</a></li>
+</ol>
+<p>滚动与分页：</p>
+<ol>
+<li><a href="https://www.guokr.com/article/71325/?page=2">网页滚动条，你觉得要取消吗？ | 果壳网</a></li>
+<li><a href="https://www.cio.com.au/article/405735/opera_cto_kill_browser_scroll_bar/">Opera CTO: Kill the browser scroll bar | CIO</a></li>
+<li><a href="https://stackoverflow.com/questions/3296644/hiding-the-scrollbar-on-an-html-page/25561646#25561646">Hiding the scrollbar on an HTML page | Stack Overflow</a></li>
+<li><a href="https://thetype.com/2011/01/3094/">讨论：长文的数字排版与阅读 | Type is Beautiful</a></li>
+<li><a href="https://ia.net/topics/ipad-scroll-or-card">iPad: Scroll or Card? | iA</a></li>
+</ol>
+<p>网页排版：</p>
+<ol>
+<li><a href="https://blog.coding.net/blog/Web-Fonts">Web 字体的选择和运用 | Coding 博客</a></li>
+<li><a href="https://www.voyax.me/posts/59710/">Web 中文字体排版指南 | voya</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2014/07/chinese_fonts.html">中文字体网页开发指南 | 阮一峰的网络日志</a></li>
+<li><a href="https://segmentfault.com/a/1190000006110417/">如何优雅的选择字体（font-family） | SegmentFault</a></li>
+<li><a href="https://csspod.com/using-the-system-font-in-web-content/">在 Web 内容中使用系统字体 | CSSPod</a></li>
+<li><a href="https://zenozeng.github.io/fonts.css/">Fonts.css——跨平台中文字体解决方案</a></li>
+<li><a href="http://blog-en.tilda.cc/articles-website-design-mistakes/">Common webpage design mistakes | Tilda Publishing Blog</a></li>
+</ol>
+<p>一些本人所见排版很棒的网站：</p>
+<ol>
+<li><a href="https://www.newyorker.com/">The New Yorker</a></li>
+<li><a href="https://theoutline.com/">The Outline</a></li>
+<li><a href="https://derekkedziora.com/">Derek Kedziora</a></li>
+</ol>
+</div>
+
+        </article>
+
+        
+
+        
+    
+    
+    
+        <ul class="post-copyright">
+            <li class="copyright-item author">作者：<a href="https://vkill.com/" target="_blank">wucy</a></li>
+            
+                
+                
+                
+                
+                <li class="copyright-item link">链接：<a href="../../tech/the-philosophy-of-web-typography-text-indent-or-margin/" target="_blank">https://vkill.com/tech/the-philosophy-of-web-typography-text-indent-or-margin/</a></li>
+            
+            
+                <li class="copyright-item license">版权：在保留本文作者及本文链接的前提下，非商业用途随意转载分享。</li>
+            
+        </ul>
+    
+
+
+        
+    <div class="updated-badge-container"><div title="Updated @ 2020-01-13 22:52:54 CST" style="cursor:help;display:inline-block">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="130" height="20" class="updated-badge"><linearGradient id="b" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="a"><rect width="130" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#a)"><path class="updated-badge-left" d="M0 0h55v20H0z"/><path class="updated-badge-right" d="M55 0h75v20H55z"/><path fill="url(#b)" d="M0 0h130v20H0z"/></g><g fill="#fff" text-anchor="middle" font-size="110"><text x="285" y="150" fill="#010101" fill-opacity=".3" textLength="450" transform="scale(.1)">updated</text><text x="285" y="140" textLength="450" transform="scale(.1)">updated</text><text x="915" y="150" fill="#010101" fill-opacity=".3" textLength="650" transform="scale(.1)">2020-01-13</text><text x="915" y="140" textLength="650" transform="scale(.1)">2020-01-13</text></g></svg></div></div>
+
+
+        
+
+        
+
+        
+
+        
+    <footer class="minimal-footer">
+        
+            
+            <div class="post-tag"><a href="../../tags/typography/" rel="tag" class="post-tag-link">#typography</a> <a href="../../tags/philosophy/" rel="tag" class="post-tag-link">#philosophy</a></div>
+        
+        
+            <div class="post-category">
+                <a href="../../tech/" class="post-category-link active">tech</a> | <a href="../../life/" class="post-category-link">life</a>
+            </div>
+        
+        
+    </footer>
+
+
+        
+
+        
+
+        
+
+    </div>
+</main>
+
+            
+    <div id="back-to-top" class="back-to-top">
+        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon"><path d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"/></svg></a>
+    </div>
+
+            
+        </div>
+        <script src="../../js/meme.min.10b69ef81544b96691de93039f8eeb6403f8a00b15efb5a7d14f327d2fbd5c99.js" integrity="sha256-ELae+BVEuWaR3pMDn47rZAP4oAsV77Wn0U8yfS+9XJk=" data-no-instant></script>
+
+
+    <script data-no-instant>InstantClick.init();</script>
+
+
+    <script data-no-instant>
+        InstantClick.on('change', function () {
+            backToTop();
+        });
+    </script>
+
+
+
+    <script data-no-instant>
+        InstantClick.on('change', function () {
+            const userPrefers = localStorage.getItem('theme');
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const lightModeMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+            if (userPrefers === "dark") {
+                changeModeMeta("dark");
+                changeMode("🌙", "chroma", "chroma-dark");
+            } else if (userPrefers === "light") {
+                changeModeMeta("light");
+                changeMode("🌞", "chroma-dark", "chroma");
+            } else if (darkModeMediaQuery.matches) {
+                changeModeMeta("dark");
+                changeMode("🌙", "chroma", "chroma-dark");
+            } else if (lightModeMediaQuery.matches) {
+                changeModeMeta("light");
+                changeMode("🌞", "chroma-dark", "chroma");
+            }
+        });
+    </script>
+<script data-no-instant>
+            InstantClick.on('change', function () {
+                gtag('config', 'UA-100434861-1', {
+                    'page_path': location.pathname + location.search
+                });
+            });
+        </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+
+<script>
+    var scroll = new SmoothScroll('a[href*="#"]', {
+        speedAsDuration: true
+    });
+</script>
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist/medium-zoom.min.js"></script>
+
+<script>
+    mediumZoom('[data-zoomable]', {
+        background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)'
+    })
+</script>
+
+
+
+
+    <div class="app-refresh" id="app-refresh">
+        <div class="app-refresh-wrap" onclick="location.reload()">
+            <label>已更新最新版本</label>
+            <span>点击刷新</span>
+        </div>
+    </div>
+
+    <script>
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('../../sw.js')
+            .then(reg => {
+                reg.addEventListener('updatefound', () => {
+                    newWorker = reg.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed') {
+                            if (navigator.serviceWorker.controller) {
+                                showNotification();
+                            }
+                        }
+                    });
+                });
+            });
+        }
+        
+        function showNotification() {
+            document.querySelector('meta[name=theme-color]').content = '#000';
+            document.getElementById('app-refresh').className += ' app-refresh-show';
+        }
+    </script>
+
+
+
+
+
+
+
+    </body>
+</html>

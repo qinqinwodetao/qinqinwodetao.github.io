@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
+
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>vkill</title>
+        <link>https://vkill.com/en-us/</link>
+        <description>Blog of reuixiy in English.</description>
+        <generator>Hugo 0.62.2 https://gohugo.io/</generator>
+        
+            <language>en-US</language>
+        
+        
+            <managingEditor>wucy1991@gmail.com (wucy)</managingEditor>
+        
+        
+            <webMaster>wucy1991@gmail.com (wucy)</webMaster>
+        
+        
+            <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</copyright>
+        
+        <lastBuildDate>Mon, 13 Jan 2020 23:43:33 +0800</lastBuildDate>
+        
+            <atom:link rel="self" type="application/rss+xml" href="https://vkill.com/en-us/rss.xml" />
+        
+        
+    </channel>
+</rss>

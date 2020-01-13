@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+    <head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#">
+    <meta charset="UTF-8" /><meta name="theme-color" content="#1c1c21" />
+        <script>
+            const userPrefers = localStorage.getItem('theme');
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const lightModeMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+            if (userPrefers === "dark") {
+                changeModeMeta("dark");
+            } else if (userPrefers === "light") {
+                changeModeMeta("light");
+            } else if (darkModeMediaQuery.matches) {
+                changeModeMeta("dark");
+            } else if (lightModeMediaQuery.matches) {
+                changeModeMeta("light");
+            }
+            function changeModeMeta() {
+                document.documentElement.setAttribute('data-theme', arguments[0]);
+                if (arguments[0] === "dark") {
+                    changeThemeColor("#1c1c21");
+                } else {
+                    changeThemeColor("#fff");
+                }
+            }
+            function changeThemeColor() {
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', arguments[0]);
+            }
+        </script>
+
+    
+        
+        
+        <script>
+            if (window.location.host == "vkill.com" && window.location.protocol != "https:") {
+                window.location.protocol = "https";
+            }
+        </script>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    
+    <meta name="renderer" content="webkit" />
+
+    <meta name="generator" content="Hugo 0.62.2" />
+
+    <title>博客三问 | vkill</title>
+
+    <link rel="stylesheet" href="../../css/meme.min.7a07eed0b3e1535d38185b2b8372c41fd93789db72b0fa04d1a967047ffbf1e9.css" integrity="sha256-egfu0LPhU104GFsrg3LEH9k3idtysPoE0alnBH/78ek=" data-instant-track />
+
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700,700i|Noto+Serif+SC:400,700|Source+Code+Pro:400,400i,700,700i|Cinzel+Decorative:700&display=swap&subset=chinese-simplified" rel="stylesheet" />
+
+    <meta name="author" content="wucy" />
+    
+    
+    <meta name="description" content="博客是什么 博客是一种由个人管理、张贴新的文章、图片或影片的网站或在线日记，用来纪录、……" />
+    <meta name="keywords" content="blogging, philosophy" />
+    
+    <link rel="shortcut icon" type="image/ico" href="../../favicon.ico" />
+    <link rel="mask-icon" href="../../icons/safari-pinned-tab.svg" color="#2a6df4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="vkill" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="vkill" />
+    <meta name="msapplication-starturl" content="../../" />
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="../../icons/mstile-150x150.png" />
+    <link rel="manifest" href="../../manifest.json" />
+
+    
+    
+
+    
+    <link rel="canonical" href="https://vkill.com/tech/on-three-questions-about-blogging/" />
+
+
+
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "datePublished": "2019-12-01T21:18:50+08:00",
+        "dateModified": "2020-01-13T22:52:54+08:00",
+        "url": "https://vkill.com/tech/on-three-questions-about-blogging/",
+        "headline": "博客三问",
+        "description": "博客是什么 博客是一种由个人管理、张贴新的文章、图片或影片的网站或在线日记，用来纪录、……",
+        "keywords": "blogging, philosophy",
+        "inLanguage" : "zh-CN",
+        "articleSection": "tech",
+        "wordCount":  3560 ,
+        "image": "https://vkill.com/icons/apple-touch-icon.png",
+        "author": {
+            "@type": "Person",
+            "description": "happy wife, happy life",
+            "email": "wucy1991@gmail.com",
+            "image": "https://vkill.com/icons/apple-touch-icon.png",
+            "url": "https://vkill.com/",
+            "name": "wucy"
+        },
+        "license": "在保留本文作者及本文链接的前提下，非商业用途随意转载分享。",
+        "publisher": {
+            "@type": "Organization",
+            "name": "vkill",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://vkill.com/icons/apple-touch-icon.png"
+            },
+            "url": "https://vkill.com/"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebSite",
+            "@id": "https://vkill.com/"
+        }
+    }
+</script>
+
+    
+
+
+
+<meta name="twitter:card" content="summary" />
+
+<meta name="twitter:site" content="@wucy" />
+<meta name="twitter:creator" content="@wucy1991" />
+
+    
+
+
+
+
+
+
+<meta property="og:title" content="博客三问" />
+<meta property="og:description" content="博客是什么 博客是一种由个人管理、张贴新的文章、图片或影片的网站或在线日记，用来纪录、……" />
+<meta property="og:url" content="https://vkill.com/tech/on-three-questions-about-blogging/" />
+<meta property="og:site_name" content="vkill" />
+<meta property="og:locale" content="zh-CN" />
+            <meta property="og:locale:alternate" content="en-US" />
+        <meta property="og:image" content="https://vkill.com/icons/apple-touch-icon.png" />
+    <meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2019-12-01T21:18:50+08:00" />
+    <meta property="article:modified_time" content="2020-01-13T22:52:54+08:00" />
+    
+    <meta property="article:section" content="tech" />
+    <meta property="article:tag" content="blogging, philosophy" />
+
+        
+
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-100434861-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-100434861-1');
+    </script>
+
+
+
+
+    
+</head>
+
+    <body>
+        <div class="container">
+            
+    <header class="header">
+        <div class="site-brand">
+            
+            <a href="../../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66.146 26.458" class="brand"><path d="M58.216 17.03v-2.505c1.084 0 3.793.067 5.351.225l.068-.067c-.045-.204-.068-.655-.068-.858 0-.204.023-.633.068-.836l-.068-.067c-1.332.112-2.687.225-5.35.225V11.5c0-.384.022-2.438.18-2.98 3.025 0 6.457.27 6.457.27l.045-.09c-.022-.18-.045-.722-.045-.925 0-.18 0-.474.045-.79l-.045-.068c-.361.045-.88.068-1.355.068h-6.863c-.768 0-1.897-.068-1.897-.068l-.045.068c.18 1.287.271 2.822.271 4.515v5.532c0 1.693-.09 3.296-.27 4.515l.022.068s1.129-.068 1.919-.068h7.09c.473 0 .993.023 1.354.068l.045-.068c-.045-.293-.045-.587-.045-.813 0-.225.022-1.06.045-1.241l-.045-.09s-3.658.496-6.683.496c-.158-.542-.18-2.483-.18-2.867zm-20.694-3.363l-.113-.068c0-.497-.022-1.445-.045-1.648-.045-.136-.068-.226-.203-.226-.655.113-2.123.113-2.913.068l-.045.067c.158.971.248 2.71.248 4.38v1.242c0 1.694-.09 2.845-.27 4.064l.022.068s.948-.068 1.739-.068c.767 0 1.67.068 1.67.068l.045-.068c-.18-1.287-.225-2.348-.225-4.064v-2.28c.948-1.152 1.76-1.829 2.393-1.829.858 0 1.332.316 1.332 1.829v2.28c0 1.694-.09 2.845-.27 4.064l.022.068s1.016-.068 1.806-.068c.767 0 1.648.068 1.648.068l.045-.068c-.18-1.287-.27-2.348-.27-4.064v-1.987c0-.316 0-.406-.023-.677 1.083-1.197 1.58-1.445 2.46-1.445.723 0 1.242.497 1.242 2.01v2.1c0 1.693-.09 2.844-.27 4.063l.022.068s1.016-.068 1.806-.068c.768 0 1.648.068 1.648.068l.046-.068c-.181-1.287-.271-2.348-.271-4.064v-2.258c0-2.257-.79-3.59-3.229-3.59-1.129 0-2.303.452-3.59 1.807-.451-1.129-1.084-1.806-3.093-1.806-1.106 0-2.506.925-3.364 2.032zm-12.436 2.122c.068-1.106.339-1.874.677-2.348a1.645 1.645 0 0 1 1.377-.677c.904 0 1.468 1.06 1.468 3.025zm6.209 3.341c-1.061.858-2.145.926-3.093.926-1.107 0-1.92-.293-2.461-.88-.497-.542-.745-1.332-.745-2.371h2.235c2.258 0 4.2.045 4.2.045l.135-.135c0-2.823-.79-5.08-4.268-5.08-1.241 0-2.596.406-3.5 1.129-1.083.903-1.828 2.28-1.828 4.131 0 1.332.474 2.755 1.423 3.703.767.813 2.1 1.174 3.793 1.174 1.625 0 3.228-.52 4.47-1.942 0-.293-.135-.7-.361-.7zM4 6.803c-.835 4.832-2.032 10.499-2.98 14.811.248-.068.767-.068 1.038-.068.249 0 1.016 0 1.265.068.067-2.37.632-7.157 1.241-10.68l.068.023a153.476 153.476 0 0 1 4.29 10.59h1.445c1.648-3.749 3.454-7.135 5.373-10.612h.068c.43 3.567.723 6.931 1.039 10.679.338-.068 1.422-.068 1.76-.068.34 0 1.31 0 1.649.068-.7-4.9-1.197-9.257-1.784-14.811h-2.009L10.82 17.302h-.09c-1.784-3.568-3.094-6.864-4.426-10.499z"/></svg></a>
+            
+        </div>
+    </header>
+
+            
+            <div class="lang-toggle" onmouseover="langSwitcherOver()" onmouseout="langSwitcherOut()" data-hide="true">
+        🇨🇳
+        
+            
+        
+    </div>
+
+            
+    
+        
+            
+        
+        <div id="theme-toggle" onclick="modeSwitcher()" data-hide="true">🌙</div>
+    
+
+            
+    <main class="main single" id="main">
+    <div class="main-inner">
+
+        <article class="content post" data-align="justify" data-type="tech">
+
+            <h1 class="post-title">博客三问</h1>
+
+            
+
+            
+                
+            
+
+            
+
+            <div class="post-body"><h2 id="what"><a href="#what" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>博客是什么</h2>
+<p>博客是一种由个人管理、张贴新的文章、图片或影片的网站或在线日记，用来纪录、抒发情感或分享信息。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>博客是英语 Blog 的音译词，但这个单词并不是博客的起源，Jorn Barger 于 1997 年 12 月 17 日创造的术语「Weblog」（即 Web log，网络日志） 才是博客的起源。后来，在 1999 年 4 或 5 月的时候，Peter Merholz 在他的博客 <a href="https://www.peterme.com/">Peterme.com</a> 的侧栏上将 Weblog 断开来，调侃为短语「We blog」，于是 Blog 一词就在网络上流行起来了。<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>听起来像是一段有趣的历史，但似乎离我们有点遥远、古老了。特别是，对于由 QQ 空间、微信朋友圈、新浪微博、抖音伴随成长起来的年轻一代，博客两字好像有点新鲜，但又有点老派了。年轻一代听到博客两字，可能会眉头微皱并问「那是什么？」「一个自己的网站……」「哦哦，听起来挺高大上……」也就是说，对于手机陪伴成长的年轻一代，博客可能是一个非常<strong class="emphasis-point">极客</strong>的一个东西。「……其实也没有，就是一个记录自己的网络日志……」所以，从这个层面来说，博客其实与我们每天常用的各种手机 APP 没有什么不同——也与古老的手写日记也没有什么不同——它们都是一种记录自己的方式。</p>
+<p>「……哦，那还挺古董的，现在朋友圈、微博都这么方便，发个图、短视频啥的也记录了自己——没想到你还是个文艺青年……」听起来也似乎的确如此，相比满屏的文字，技术进步带来的图片、音频、视频不是能够更贴近地记录自己吗？为什么在这个现代的互联网时代，我们还要去写博客呢？<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<h2 id="why"><a href="#why" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>为什么博客</h2>
+<p>苏轼《题西林壁》有名句：「不识庐山真面目，只缘身在此山中。」故为了避免片面的短浅，这里先从历史和逻辑的层面／高度看看博客的地位。以技术进步的视角看：最先由于网络的带宽不够，所以以文本为主的博客占主要；后来网络的带宽上去了，带摄像头的设备普及了，图片、视频类网站逐渐兴起并占主流；未来呢，可能就是虚拟现实（VR）的天下了……以时代发展的视角看，简短的内容更适合现代社会的快节奏都市生活。对于这点，在移动设备（手机）上有直接的体现，3G 时代博客的简化版<a href="https://zh.wikipedia.org/wiki/%E5%BE%AE%E5%8D%9A">微博</a>的兴起，4G 时代视频的简化版短视频的兴起……所以，现在还写博客其实是一种返祖？</p>
+<p>并不，写博客也许是一种历史逆行，但绝对不是一种逻辑退化。最近，以音频为载体的播客（Podcast）好像逐渐流行起来了，国内流行的音乐平台网易云音乐也有相应的「电台」模块。《纽约时报》近期的一篇文章 <a href="https://www.nytimes.com/2019/11/20/style/audio-porn-erotica-quinn-dipsea.html"><em>What If Porn Had No Pictures?</em></a> 也提到「日益壮大的<strong class="emphasis-point">音频</strong>色情世界」<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>。在这个视频时代，为什么还会有人去录播客呢？大概是因为没有了画面的音频消散了都市的繁华，激发了无尽的想象。播客其实就是视频和文字之间的一种折中，现代人厌倦了视频的喧嚣，于是想找回文字的宁静，但又困于浮躁和慵懒，于是转向了这一折中——更随意的播客。而让我们逆行到更古老的历史，人类是先学会说话，然后学会写作的。因此，在这个意义上，写博客其实是一种逻辑上的进化。</p>
+<p>更广泛地说，博客、播客、视频的主体／载体其实都是语言。与之不同的可能就是绘画、音乐、舞蹈，通过一张画把一天的经历表达出来；通过一首曲把一天的感受表达出来；通过一支舞把自己一天的心情表达出来。只不过，以语言为载体、以文字为主体的博客更易于理解，更易于传播。</p>
+<hr>
+<p>以上说的是写博客的形而上的意义／价值／为什么，下面来说说写博客的几个实用方面。</p>
+<p>一、写博客能让你在这个快节奏的都市生活中慢下来，能让你在这个「抖心」的时代静心下来。</p>
+<p>二、孔子有言「学而不思则罔」（《论语·为政》），多闻多见却不认真思考是茫然无获的。孔子又言「下学而上达」（《论语·宪问》），所谓「下学」，即多学而识，即学习新知识；所谓「上达」，即一以贯之，即思考、反省、总结。<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>可见，思基于学但又高于学，而写博客就是「思」的过程，写博客就是「上达」的过程。这里还需特别注意，不能将「学」简单理解为看书，生活、技术、电影、音乐等等方面的经历也是「学」，故也需要「思」。因此，如果你是个技术人员，你不仅应该在自己的博客上记录自己的技术折腾，也应该去记录自己的生活经历。当然，和别人交谈也是一种反思的过程，但用文字记录下来会更易读、更有利于传播。</p>
+<p>三、通过写博客，你的想法能够在互联网世界中传播，成就更大的价值。思想的价值在于传播，如果你不与这个世界建立联系，不将自己的发现分享出去，那么你的发现其实是毫无价值的。另对个人来说，只有将你的作品分享出去、传播出去，你才会是一个成功的人。</p>
+<hr>
+<p>细心的你可能会注意到本节的标题是「为什么博客」，而博客是一个名词，但上面说的都是「为什么写博客」而非「为什么是博客」。其实，英文中的 Blog 既是名词也是动词，在此博主就调皮地借用一下，以表达双重含义。那么，为什么是博客呢？即为什么不是纸质笔记本，为什么不是微信朋友圈，为什么不是……</p>
+<p>一、博客是一本<strong class="emphasis-point">现代</strong>的电子笔记本。现代人应该要用现代的工具，如果你现在还用传统的纸质笔记本，就可能会遇到落差，比如添加一张图片到笔记中。此外，相比手写，风格统一的博客的可读性更高。</p>
+<p>二、博客能够完美且简单地解决笔记的<a href="../../tech/categories+tags/">组织和分类问题</a>。简述一下，大家所做的笔记都是按时间顺序的，要想不打破这种顺序进行再分类（归档）是非常困难的，而博客就会方便很多。</p>
+<p>三、相比微信朋友圈，博客不仅更为纯净，还更为强大、灵活、自由。此外，朋友圈的传播范围只限于你的好友，但博客却能够传播到互联网的每一角落。</p>
+<p>说到微信朋友圈，这里顺便说一说微信公众号这类写作平台。博主是不建议在这类写作平台上写文章的，因为在这些平台上写文章会有诸多限制，比如：内容、排版、修改限制、强制广告等等。博主建议在自己的<strong class="emphasis-point">独立博客</strong>上写作，这样你就可以完善每一细节，从文章的写作流程到最终的排版样式。</p>
+<h2 id="how"><a href="#how" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>怎么写博客</h2>
+<p>谈完定义／是什么／什么是，谈完意义／价值／目标／为什么，最后来谈谈博客的方法／工具／怎么做。</p>
+<p>技术方面，首先肯定是建议搭建一个属于自己的独立博客。对于架构，推荐简单且现代的静态博客，这样你就可以直接将博客部署到免费的静态页面服务提供商上，比如 <a href="https://pages.github.com/">GitHub Pages</a> 和 <a href="https://www.netlify.com/">Netlify</a>。对于静态博客的生成工具／框架，推荐直接使用功能齐全且非常简洁、灵活的 <a href="https://gohugo.io/">Hugo</a>，非常适合博客！当然，你也可以尝试其它的流行框架，比如：<a href="https://jekyllrb.com/">Jekyll</a>、<a href="http://gatsbyjs.org/">Gatsby</a>、<a href="https://hexo.io/">Hexo</a> 等等<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>。对于主题，我推荐极简风格的，因为这能让你更<strong class="emphasis-point">专注文字</strong>。对于静态博客的部署，非常推荐持续集成的方式，即用 Git 版本化博客，然后通过云端的持续集成服务自动构建并部署博客。最后，强烈推荐<a href="../../tech/continuous-writing-with-github-issues/">使用 GitHub Issues 持续写作</a>！</p>
+<p>写作方面，首先肯定是推荐使用 Markdown，它将必要排版需求「纯文本化」，它让你更专注文字，更享受写作的过程。对于内容，千万不要害怕自己写得不对，建议只写<strong class="emphasis-point">原创</strong>，建议多写总结而非纯「机器日志」。同时，要认识到自己<a href="#why">为什么博客</a>，不要为了博客或别人的反馈而博客，那样只会让你自己崩溃，那样只会让你的博客逐渐长草。如何提高产量？不要分散自己的「想法源泉」，学会将博客作为自己的唯一输出。当你突然闪出一个想法时，不应该心里急着赶紧发朋友圈、发推特，应该想到<strong class="emphasis-point">持续写作</strong>，即去 GitHub 上新建一条 Issue 记录并追踪这个想法，以供自己日后整理成一篇完整的文章。</p>
+<p>其它方面。对于页面浏览量、点赞喜欢、评分评论等等各种反馈，有人认为这不利于写作，有人说反馈能促进创作，故是否需要这些反馈取决于你自己的情况。同时，如果你开了评论，就不要再去「政治审核」筛选，不然评论其实就是完全没必要的，如微信公众号一样。最后，世界是有对立两面的，互联网上的言论也是如此。事实上，联接彼此的互联网是一个更为冲突的世界，但千万不要被别人的「恶意言论」击倒！要像 Taylor Swift 告诫的「Just keep making things」<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>那样——千万不要停止创作新文章！</p>
+<hr>
+<p><strong>结语</strong>：虽然博客的时代好像已经过去了，但我相信它是会再次到来的，特别是对于独立博客。技术的进步已经让网页不再丑陋，现代的博客已经拥有极佳的阅读体验，博客势必会再次流行起来，如 <a href="https://medium.com/">Medium</a> 向我们证明的那样；现在兴起的开箱即用的各种静态博客平台，极大地降低了独立博客的技术门槛，独立博客势必将独领风骚，如未来向我们证明的那样。</p>
+<hr>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>来源：<a href="https://zh.wikipedia.org/wiki/%E7%B6%B2%E8%AA%8C">https://zh.wikipedia.org/wiki/網誌</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>参考：<a href="https://en.wikipedia.org/wiki/Blog">https://en.wikipedia.org/wiki/Blog</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>说明：本文所探讨的博客是一种狭义、古典的博客，即以纪录、文字为主，以独立博客为主。 <a href="#fnref:3" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>原文：[...] the growing world of audio pornography. <a href="#fnref:4" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>参考：张岱年主编：《中华的智慧》，中华书局，2017 年版，孔子。 <a href="#fnref:5" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>更多：<a href="https://www.staticgen.com/">https://www.staticgen.com/</a> <a href="#fnref:6" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7" role="doc-endnote">
+<p>来源：<a href="https://www.sheknows.com/entertainment/articles/2123682/taylor-swift-slut-shaming-music-industry/">https://www.sheknows.com/entertainment/articles/2123682/taylor-swift-slut-shaming-music-industry/</a> <a href="#fnref:7" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+</div>
+
+        </article>
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+    <footer class="minimal-footer">
+        
+            
+            <div class="post-tag"><a href="../../tags/blogging/" rel="tag" class="post-tag-link">#blogging</a> <a href="../../tags/philosophy/" rel="tag" class="post-tag-link">#philosophy</a></div>
+        
+        
+            <div class="post-category">
+                <a href="../../tech/" class="post-category-link active">tech</a> | <a href="../../life/" class="post-category-link">life</a>
+            </div>
+        
+        
+    </footer>
+
+
+        
+
+        
+
+        
+
+    </div>
+</main>
+
+            
+    <div id="back-to-top" class="back-to-top">
+        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon"><path d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"/></svg></a>
+    </div>
+
+            
+        </div>
+        <script src="../../js/meme.min.10b69ef81544b96691de93039f8eeb6403f8a00b15efb5a7d14f327d2fbd5c99.js" integrity="sha256-ELae+BVEuWaR3pMDn47rZAP4oAsV77Wn0U8yfS+9XJk=" data-no-instant></script>
+
+
+    <script data-no-instant>InstantClick.init();</script>
+
+
+    <script data-no-instant>
+        InstantClick.on('change', function () {
+            backToTop();
+        });
+    </script>
+
+
+
+    <script data-no-instant>
+        InstantClick.on('change', function () {
+            const userPrefers = localStorage.getItem('theme');
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const lightModeMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+            if (userPrefers === "dark") {
+                changeModeMeta("dark");
+                changeMode("🌙", "chroma", "chroma-dark");
+            } else if (userPrefers === "light") {
+                changeModeMeta("light");
+                changeMode("🌞", "chroma-dark", "chroma");
+            } else if (darkModeMediaQuery.matches) {
+                changeModeMeta("dark");
+                changeMode("🌙", "chroma", "chroma-dark");
+            } else if (lightModeMediaQuery.matches) {
+                changeModeMeta("light");
+                changeMode("🌞", "chroma-dark", "chroma");
+            }
+        });
+    </script>
+<script data-no-instant>
+            InstantClick.on('change', function () {
+                gtag('config', 'UA-100434861-1', {
+                    'page_path': location.pathname + location.search
+                });
+            });
+        </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+
+<script>
+    var scroll = new SmoothScroll('a[href*="#"]', {
+        speedAsDuration: true
+    });
+</script>
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist/medium-zoom.min.js"></script>
+
+<script>
+    mediumZoom('[data-zoomable]', {
+        background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)'
+    })
+</script>
+
+
+
+
+    <div class="app-refresh" id="app-refresh">
+        <div class="app-refresh-wrap" onclick="location.reload()">
+            <label>已更新最新版本</label>
+            <span>点击刷新</span>
+        </div>
+    </div>
+
+    <script>
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('../../sw.js')
+            .then(reg => {
+                reg.addEventListener('updatefound', () => {
+                    newWorker = reg.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed') {
+                            if (navigator.serviceWorker.controller) {
+                                showNotification();
+                            }
+                        }
+                    });
+                });
+            });
+        }
+        
+        function showNotification() {
+            document.querySelector('meta[name=theme-color]').content = '#000';
+            document.getElementById('app-refresh').className += ' app-refresh-show';
+        }
+    </script>
+
+
+
+
+
+
+
+    </body>
+</html>

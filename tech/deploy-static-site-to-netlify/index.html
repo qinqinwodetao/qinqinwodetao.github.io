@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+    <head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#">
+    <meta charset="UTF-8" /><meta name="theme-color" content="#1c1c21" />
+        <script>
+            const userPrefers = localStorage.getItem('theme');
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const lightModeMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+            if (userPrefers === "dark") {
+                changeModeMeta("dark");
+            } else if (userPrefers === "light") {
+                changeModeMeta("light");
+            } else if (darkModeMediaQuery.matches) {
+                changeModeMeta("dark");
+            } else if (lightModeMediaQuery.matches) {
+                changeModeMeta("light");
+            }
+            function changeModeMeta() {
+                document.documentElement.setAttribute('data-theme', arguments[0]);
+                if (arguments[0] === "dark") {
+                    changeThemeColor("#1c1c21");
+                } else {
+                    changeThemeColor("#fff");
+                }
+            }
+            function changeThemeColor() {
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', arguments[0]);
+            }
+        </script>
+
+    
+        
+        
+        <script>
+            if (window.location.host == "vkill.com" && window.location.protocol != "https:") {
+                window.location.protocol = "https";
+            }
+        </script>
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    
+    <meta name="renderer" content="webkit" />
+
+    <meta name="generator" content="Hugo 0.62.2" />
+
+    <title>将 Hexo 静态博客部署到 Netlify | vkill</title>
+
+    <link rel="stylesheet" href="../../css/meme.min.7a07eed0b3e1535d38185b2b8372c41fd93789db72b0fa04d1a967047ffbf1e9.css" integrity="sha256-egfu0LPhU104GFsrg3LEH9k3idtysPoE0alnBH/78ek=" data-instant-track />
+
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700,700i|Noto+Serif+SC:400,700|Source+Code+Pro:400,400i,700,700i|Cinzel+Decorative:700&display=swap&subset=chinese-simplified" rel="stylesheet" />
+
+    <meta name="author" content="wucy" />
+    
+    
+    <meta name="description" content="1前言 我的这个博客一直都是部署在 GitHub Pages 上的，且用的是最原始的方式，即先在自己的电脑上安……" />
+    <meta name="keywords" content="hexo" />
+    
+    <link rel="shortcut icon" type="image/ico" href="../../favicon.ico" />
+    <link rel="mask-icon" href="../../icons/safari-pinned-tab.svg" color="#2a6df4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="vkill" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="vkill" />
+    <meta name="msapplication-starturl" content="../../" />
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="../../icons/mstile-150x150.png" />
+    <link rel="manifest" href="../../manifest.json" />
+
+    
+    
+
+    
+    <link rel="canonical" href="https://vkill.com/tech/deploy-static-site-to-netlify/" />
+
+
+
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "datePublished": "2019-06-09T16:27:01+08:00",
+        "dateModified": "2020-01-13T22:52:54+08:00",
+        "url": "https://vkill.com/tech/deploy-static-site-to-netlify/",
+        "headline": "将 Hexo 静态博客部署到 Netlify",
+        "description": "1前言 我的这个博客一直都是部署在 GitHub Pages 上的，且用的是最原始的方式，即先在自己的电脑上安……",
+        "keywords": "hexo",
+        "inLanguage" : "zh-CN",
+        "articleSection": "tech",
+        "wordCount":  2203 ,
+        "image": ["https://vkill.com/images/netlify.png","https://vkill.com/images/netlify-wildcard-ssl-tls.png","https://vkill.com/images/netlify-http2.png","https://vkill.com/images/netlify-upload-folder-to-deploy.png","https://vkill.com/images/set-up-netlify-dns.png","https://vkill.com/images/set-up-netlify-dns-in-godaddy.png","https://vkill.com/images/netlify-https.png","https://vkill.com/images/github-pages-https-error.png","https://vkill.com/images/netlify-redirect-seo.png"],
+        "author": {
+            "@type": "Person",
+            "description": "happy wife, happy life",
+            "email": "wucy1991@gmail.com",
+            "image": "https://vkill.com/icons/apple-touch-icon.png",
+            "url": "https://vkill.com/",
+            "name": "wucy"
+        },
+        "license": "在保留本文作者及本文链接的前提下，非商业用途随意转载分享。",
+        "publisher": {
+            "@type": "Organization",
+            "name": "vkill",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://vkill.com/icons/apple-touch-icon.png"
+            },
+            "url": "https://vkill.com/"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebSite",
+            "@id": "https://vkill.com/"
+        }
+    }
+</script>
+
+    
+
+
+
+<meta name="twitter:card" content="summary_large_image" />
+
+
+<meta name="twitter:site" content="@wucy" />
+<meta name="twitter:creator" content="@wucy1991" />
+
+    
+
+
+
+
+
+
+<meta property="og:title" content="将 Hexo 静态博客部署到 Netlify" />
+<meta property="og:description" content="1前言 我的这个博客一直都是部署在 GitHub Pages 上的，且用的是最原始的方式，即先在自己的电脑上安……" />
+<meta property="og:url" content="https://vkill.com/tech/deploy-static-site-to-netlify/" />
+<meta property="og:site_name" content="vkill" />
+<meta property="og:locale" content="zh-CN" />
+            <meta property="og:locale:alternate" content="en-US" />
+        <meta property="og:image" content="https://vkill.com/images/netlify.png" />
+<meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2019-06-09T16:27:01+08:00" />
+    <meta property="article:modified_time" content="2020-01-13T22:52:54+08:00" />
+    
+    <meta property="article:section" content="tech" />
+    <meta property="article:tag" content="hexo" />
+
+        
+
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-100434861-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-100434861-1');
+    </script>
+
+
+
+
+    
+</head>
+
+    <body>
+        <div class="container">
+            
+    <header class="header">
+        <div class="site-brand">
+            
+            <a href="../../"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66.146 26.458" class="brand"><path d="M58.216 17.03v-2.505c1.084 0 3.793.067 5.351.225l.068-.067c-.045-.204-.068-.655-.068-.858 0-.204.023-.633.068-.836l-.068-.067c-1.332.112-2.687.225-5.35.225V11.5c0-.384.022-2.438.18-2.98 3.025 0 6.457.27 6.457.27l.045-.09c-.022-.18-.045-.722-.045-.925 0-.18 0-.474.045-.79l-.045-.068c-.361.045-.88.068-1.355.068h-6.863c-.768 0-1.897-.068-1.897-.068l-.045.068c.18 1.287.271 2.822.271 4.515v5.532c0 1.693-.09 3.296-.27 4.515l.022.068s1.129-.068 1.919-.068h7.09c.473 0 .993.023 1.354.068l.045-.068c-.045-.293-.045-.587-.045-.813 0-.225.022-1.06.045-1.241l-.045-.09s-3.658.496-6.683.496c-.158-.542-.18-2.483-.18-2.867zm-20.694-3.363l-.113-.068c0-.497-.022-1.445-.045-1.648-.045-.136-.068-.226-.203-.226-.655.113-2.123.113-2.913.068l-.045.067c.158.971.248 2.71.248 4.38v1.242c0 1.694-.09 2.845-.27 4.064l.022.068s.948-.068 1.739-.068c.767 0 1.67.068 1.67.068l.045-.068c-.18-1.287-.225-2.348-.225-4.064v-2.28c.948-1.152 1.76-1.829 2.393-1.829.858 0 1.332.316 1.332 1.829v2.28c0 1.694-.09 2.845-.27 4.064l.022.068s1.016-.068 1.806-.068c.767 0 1.648.068 1.648.068l.045-.068c-.18-1.287-.27-2.348-.27-4.064v-1.987c0-.316 0-.406-.023-.677 1.083-1.197 1.58-1.445 2.46-1.445.723 0 1.242.497 1.242 2.01v2.1c0 1.693-.09 2.844-.27 4.063l.022.068s1.016-.068 1.806-.068c.768 0 1.648.068 1.648.068l.046-.068c-.181-1.287-.271-2.348-.271-4.064v-2.258c0-2.257-.79-3.59-3.229-3.59-1.129 0-2.303.452-3.59 1.807-.451-1.129-1.084-1.806-3.093-1.806-1.106 0-2.506.925-3.364 2.032zm-12.436 2.122c.068-1.106.339-1.874.677-2.348a1.645 1.645 0 0 1 1.377-.677c.904 0 1.468 1.06 1.468 3.025zm6.209 3.341c-1.061.858-2.145.926-3.093.926-1.107 0-1.92-.293-2.461-.88-.497-.542-.745-1.332-.745-2.371h2.235c2.258 0 4.2.045 4.2.045l.135-.135c0-2.823-.79-5.08-4.268-5.08-1.241 0-2.596.406-3.5 1.129-1.083.903-1.828 2.28-1.828 4.131 0 1.332.474 2.755 1.423 3.703.767.813 2.1 1.174 3.793 1.174 1.625 0 3.228-.52 4.47-1.942 0-.293-.135-.7-.361-.7zM4 6.803c-.835 4.832-2.032 10.499-2.98 14.811.248-.068.767-.068 1.038-.068.249 0 1.016 0 1.265.068.067-2.37.632-7.157 1.241-10.68l.068.023a153.476 153.476 0 0 1 4.29 10.59h1.445c1.648-3.749 3.454-7.135 5.373-10.612h.068c.43 3.567.723 6.931 1.039 10.679.338-.068 1.422-.068 1.76-.068.34 0 1.31 0 1.649.068-.7-4.9-1.197-9.257-1.784-14.811h-2.009L10.82 17.302h-.09c-1.784-3.568-3.094-6.864-4.426-10.499z"/></svg></a>
+            
+        </div>
+    </header>
+
+            
+            <div class="lang-toggle" onmouseover="langSwitcherOver()" onmouseout="langSwitcherOut()" data-hide="true">
+        🇨🇳
+        
+            
+        
+    </div>
+
+            
+    
+        
+            
+        
+        <div id="theme-toggle" onclick="modeSwitcher()" data-hide="true">🌙</div>
+    
+
+            
+    <main class="main single" id="main">
+    <div class="main-inner">
+
+        <article class="content post" data-align="justify" data-type="tech">
+
+            <h1 class="post-title">将 Hexo 静态博客部署到 Netlify</h1>
+
+            
+
+            
+                
+            
+
+            
+
+            <div class="post-body"><p><sup style="float:right" id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup><img src="../../images/netlify.png" alt="netlify.png"><span class="caption">◎ 开箱即用的 Netlify</span></p>
+<h2 id="前言"><a href="#前言" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>前言</h2>
+<p>我的这个博客一直都是部署在 GitHub Pages 上的，且用的是最原始的方式，即先在自己的电脑上安装 Hexo，然后本地调试，最后 <code>hexo d</code> 将 <code>hexo g</code> 生成的 <code>public</code> 文件夹部署到 GitHub Pages 上。为什么说这种方式原始呢？因为这种方式直接将生成的可以运行的实际代码（生产版）发布到 GitHub 上，而不是源码（开发版），没有利用 GitHub 来对源码进行版本控制，这就不利于博客未来的维护、更新、开发，以及可能的开源开发。可以说，这种原始的方式所带来的弊端开始逐渐困扰我，它让我现在无法回溯自己对博客所做过的修改，也就让我现在很难将自己的博客开源出去，分享给大家🤕...</p>
+<p>为什么我当时采用的是这种如此原始的方式呢？因为我是代码小白……后来，在阅读他人的博客时，多次看到有人利用 Travis CI 去部署博客，于是慢慢地了解到软件开发中持续集成（Continuous Integration，简称 CI）的概念。但是，作为一个野生的伪程序员，我直到<strong class="emphasis-point">现在</strong>，才意识到它的意义。因此，在这篇文章中，我使用的还是最原始的方式——直接部署 <code>public</code> 到 Netlify，而非源码，需读者注意。如果你想使用更为现代的持续集成的方式来部署博客到 Netlify，请自行 Google 相关文章，自行尝试。此外，如果你是萌新，可以阅读我之前写的<a href="../../tech/hexo-next-optimization/">另一篇文章</a>。</p>
+<h2 id="简介"><a href="#简介" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>简介</h2>
+<p>什么是 Netlify 呢？<a href="https://www.netlify.com/">官网</a>。相比 GitHub Pages 的静态页面托管服务，Netlify 提供的服务可谓专业，自带 CI、支持自定义页面重定向、自定义插入代码、打包和压缩 JS 和 CSS、压缩图片、处理图片、CMS 等等，最值得一提的是 Netlify 也支持自定义域名免费 HTTPS（你也可以上传自己的证书），且是通配符证书 + TLS 1.3，甚至提供了完整的 DNS 服务，有自动的 <a href="https://www.netlify.com/docs/custom-domains/#domain-redirects">www</a> 跳转，以及超简单的子域名配置界面。此外，Netlify 每月也有 <a href="https://www.netlify.com/pricing/">100GB</a> 的流量，也自带了全球的 <a href="https://www.netlify.com/blog/2016/04/15/make-your-site-faster-with-netlifys-intelligent-cdn/">CDN</a> 服务，还支持了 GitHub Pages 官方不支持的 <a href="https://www.netlify.com/blog/2015/10/20/netlify-news-no.-6/">HTTP/2</a>、<a href="https://www.netlify.com/blog/2018/11/26/announcing-ipv6-support-on-the-netlify-application-delivery-network/">IPv6</a>（需手动开启）。</p>
+<p><img src="../../images/netlify-wildcard-ssl-tls.png" alt="netlify-wildcard-ssl-tls.png"><span class="caption">◎ 通配符证书 + TLS 1.3</span></p>
+<p><img src="../../images/netlify-http2.png" alt="netlify-http2.png"><span class="caption">◎ HTTP/2</span></p>
+<p>其实，以上这些特点都是我在尝试 Netlify 之后发现的，而我之所以会去尝试 Netlify，是因为我发现 GitHub Pages 近期变得不稳定，很多时候最大下载速度只有 20~30KB/s（未科学上网），因此我今天就找到了 Netlify，部署后自己实际体验下，效果也并不是太好🙃...</p>
+<h2 id="部署"><a href="#部署" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>部署</h2>
+<p>正如我之前所说的「本文还是使用最原始的方式——直接部署 <code>public</code> 到 Netlify，而非源码」，而我之前已经将 <code>public</code> 部署在了 GitHub，故这里就直接使用 GitHub 仓库的代码部署到 Netlify。此外，虽然 Netlify 的网站可以通过直接将 <code>public</code> 文件夹拖拽上去部署，但我还是更喜欢通过键盘控制<strong class="emphasis-point">终端</strong>而非鼠标控制界面来部署，而由于历史原因，我也无法直接抛弃 GitHub Pages。</p>
+<p><img src="../../images/netlify-upload-folder-to-deploy.png" alt="netlify-upload-folder-to-deploy.png"><span class="caption">◎ Netlify 可直接拖拽文件部署</span></p>
+<p>首先肯定是去<a href="https://app.netlify.com/signup/">注册</a>，推荐直接用 GitHub 的帐号，然后按照提示授权、选仓库，具体的操作流程我记不清了，也没截图，但印象中应该不难，尽管 Netlify 目前只提供英文界面，但其界面和交互还是相当友好的。</p>
+<p>第一次部署好后，会让你设置域名，直接输入自己的域名，然后默认即可。接下来设置 DNS，如下图，点击右方的三个点 ：</p>
+<p><img src="../../images/set-up-netlify-dns.png" alt="set-up-netlify-dns.png"><span class="caption">◎ Set up Netlify DNS</span></p>
+<p>然后按提示，去你的域名服务商的管理界面将域名服务器（DNS 服务器）修改为 Netlify 提供的地址，如下图：</p>
+<p><img src="../../images/set-up-netlify-dns-in-godaddy.png" alt="set-up-netlify-dns-in-godaddy.png"><span class="caption">◎ GoDaddy 截图</span></p>
+<p>修改域名服务器成功后，稍等片刻，应该就能进入 Netlify 的 DNS 面板（Panel）了，进入后点击右侧绿色按钮启用 IPv6。如果你的博客想要保留 <code>www</code> 开头且希望裸域名访问会自动跳转到 <code>www</code> 怎么办？直接在上面的界面中，点击 <code>www</code> 开头的右方的三个点，Set as primary domain 即可，方便快捷。</p>
+<p>接下来设置 HTTPS，这个其实 Netlify 是会自动为我们设置的，但是由于域名服务器的缓存原因（更改的 DNS 不能及时生效），这个时间可能会需要很久，因此可以去<a href="https://www.netlify.com/docs/ssl/#troubleshooting">文档</a>中提到的 Google 的<a href="https://developers.google.com/speed/public-dns/cache">这个网站</a>去清空缓存，以加速这一过程。我一开始等待了两个多小时，吃完午饭回来发现还没成功，于是根据提示去看文档，才发现了这个秘诀，清空后证书马上就生成好了，Google 大法好！</p>
+<p><img src="../../images/netlify-https.png" alt="netlify-https.png"><span class="caption">◎ HTTPS</span></p>
+<p>OK！由于我是直接部署 <code>public</code> 到 Netlify，而非持续集成，因此部署就完成了！对了，还有一件事……你会发现自动生成的名字可能会很丑，在通用设置中点击 Change site name 即可修改！</p>
+<p>由于更改了 DNS，因此 GitHub Pages 上可能就会报错，但无妨，反正添加的 CNAME 会将 reuixiy.github.io 重定向到 io-oi.me。因此，你现在可以通过以下三个域名访问本博客：</p>
+<ol>
+<li><a href="https://io-oi.me/">https://io-oi.me/</a></li>
+<li><a href="https://io-oi.netlify.com/">https://io-oi.netlify.com/</a></li>
+<li><a href="https://reuixiy.github.io/">https://reuixiy.github.io/</a></li>
+</ol>
+<p><img src="../../images/github-pages-https-error.png" alt="github-pages-https-error.png"><span class="caption">◎ GitHub Pages 报错</span></p>
+<h2 id="扩展"><a href="#扩展" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>扩展</h2>
+<p>由于我最近对此博客的<a href="../../tech/redesign-this-blog-under-minimalism/">重构</a>改变了博客的 URL 结构，导致以前的博文链接 404 了，这对读者及博客的影响都很不好。正巧 Netlify 居然提供了自定义页面重定向的功能，我赶紧去 Google Analytics 将之前的博文链接中访问量最高的 7 个找出来，然后利用 Netlify 重定向到新的链接地址！另根据提示，貌似加上下方这个重定向有利于 SEO，于是也一起加上了。</p>
+<p><img src="../../images/netlify-redirect-seo.png" alt="netlify-redirect-seo.png"><span class="caption">◎ 提示信息</span></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma-dark"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma-dark"><code class="language-yml" data-lang="yml"><span class="c"># 文件位置：~/blog/source/netlify.toml</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="p">[</span><span class="p">[</span>redirects<span class="p">]</span><span class="p">]</span><span class="w">
+</span><span class="w">  </span>from<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;https://io-oi.netlify.com/*&#34;</span><span class="w">
+</span><span class="w">  </span>to<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;https://io-oi.me/:splat&#34;</span><span class="w">
+</span><span class="w">  </span>force<span class="w"> </span>=<span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="p">[</span><span class="p">[</span>redirects<span class="p">]</span><span class="p">]</span><span class="w">
+</span><span class="w">  </span>from<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;/technology/computer/computer-aided-art/2017/06/09/hexo-next-optimization.html&#34;</span><span class="w">
+</span><span class="w">  </span>to<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;/tech/hexo-next-optimization.html&#34;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="p">[</span><span class="p">[</span>redirects<span class="p">]</span><span class="p">]</span><span class="w">
+</span><span class="w">  </span>from<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;/technology/internet/zeronet/2017/09/01/first-exploration-of-the-zeronet.html&#34;</span><span class="w">
+</span><span class="w">  </span>to<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;/tech/first-exploration-of-the-zeronet.html&#34;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="p">[</span><span class="p">[</span>redirects<span class="p">]</span><span class="p">]</span><span class="w">
+</span><span class="w">  </span>from<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;/technology/computer/system-software/2018/12/11/hello-arch-linux.html&#34;</span><span class="w">
+</span><span class="w">  </span>to<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;/tech/hello-arch-linux.html&#34;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="p">[</span><span class="p">[</span>redirects<span class="p">]</span><span class="p">]</span><span class="w">
+</span><span class="w">  </span>from<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;/technology/computer/computer-aided-art/2018/05/30/speed-up-hexo.html&#34;</span><span class="w">
+</span><span class="w">  </span>to<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;/tech/speed-up-hexo.html&#34;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="p">[</span><span class="p">[</span>redirects<span class="p">]</span><span class="p">]</span><span class="w">
+</span><span class="w">  </span>from<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;/technology/computer/computer-aided-art/2018/07/18/custom-domains-on-github-pages.html&#34;</span><span class="w">
+</span><span class="w">  </span>to<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;/tech/custom-domains-on-github-pages.html&#34;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="p">[</span><span class="p">[</span>redirects<span class="p">]</span><span class="p">]</span><span class="w">
+</span><span class="w">  </span>from<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;/beautiful/share/2018/12/11/noto-serif-sc-added-on-google-fonts.html&#34;</span><span class="w">
+</span><span class="w">  </span>to<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;/tech/noto-serif-sc-added-on-google-fonts.html&#34;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="p">[</span><span class="p">[</span>redirects<span class="p">]</span><span class="p">]</span><span class="w">
+</span><span class="w">  </span>from<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;/the-philosophy-of-web-typography/text-indent-or-margin.html&#34;</span><span class="w">
+</span><span class="w">  </span>to<span class="w"> </span>=<span class="w"> </span><span class="s2">&#34;/tech/the-philosophy-of-web-typography-text-indent-or-margin.html&#34;</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>下面是我搜索到的一些文章，我自己还未研究，也还未尝试，但也贴出来分享给大家🤪...</p>
+<p>1）持续集成：<br>
+<a href="https://www.netlify.com/blog/2015/10/26/a-step-by-step-guide-hexo-on-netlify/">A Step-by-Step Guide: Hexo on Netlify | Netlify</a></p>
+<p>2）CMS：<br>
+<a href="https://www.jianshu.com/p/817f0c55d534">Hexo Netlify CMS | 简书</a><br>
+<a href="https://www.netlifycms.org/">Netlify CMS | Open-Source Content Management System</a></p>
+<p>3）图片处理：<br>
+<a href="https://www.netlify.com/docs/image-transformation/">Image Transformation | Netlify</a></p>
+<p>4）其它静态页面托管服务平台：<br>
+<a href="https://www.bilibili.com/video/av51846868/">免费部署自己的网站 Netlify/GitHub/ZEIT/Heroku | 哔哩哔哩</a><br>
+<a href="https://www.noddl.me/2019/03/28/blog-migrate/">博客迁移至 ZEIT Now | 白玉为堂金为马</a></p>
+<p>5）其它静态博客架构：<br>
+<a href="https://blog.crimx.com/archives?search=%23Gatsby">搭建 Gatsby 博客 | CRIMX BLOG</a></p>
+<h2 id="参考"><a href="#参考" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a>参考</h2>
+<p><a href="https://hexo.io/docs/one-command-deployment#Netlify">Deployment | Hexo</a><br>
+<a href="https://segmentfault.com/a/1190000017472270">Hexo 持续部署最佳实践：Netlify+IDEA+GitHub | SegmentFault 思否</a><br>
+<a href="https://www.ferock.net/hexo-netlify%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">Hexo、Netlify 搭建静态网站 | www.ferock.net</a></p>
+<p><a href="https://www.git-tower.com/learn/git/ebook/cn/command-line/basics/why-use-version-control">为什么要使用版本控制系统？ | Tower</a><br>
+<a href="http://www.ruanyifeng.com/blog/2015/09/continuous-integration.html">持续集成是什么？ | 阮一峰的网络日志</a><br>
+<a href="https://segmentfault.com/q/1010000002712805">在一些开源框架中，dist 文件夹是什么意思 | SegmentFault 思否</a></p>
+<p><a href="https://www.netlify.com/docs/custom-domains/">Custom Domains | Netlify</a><br>
+<a href="https://www.netlify.com/docs/redirects/">Redirects | Netlify</a><br>
+<a href="https://www.netlify.com/docs/netlify-toml-reference/">netlify.toml Reference | Netlify</a></p>
+<hr>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>截图自：<a href="https://www.netlify.com/products/">https://www.netlify.com/products/</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="icon footnote-icon"><path d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"/></svg></a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+</div>
+
+        </article>
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+    <footer class="minimal-footer">
+        
+            
+            <div class="post-tag"><a href="../../tags/hexo/" rel="tag" class="post-tag-link">#hexo</a></div>
+        
+        
+            <div class="post-category">
+                <a href="../../tech/" class="post-category-link active">tech</a> | <a href="../../life/" class="post-category-link">life</a>
+            </div>
+        
+        
+    </footer>
+
+
+        
+
+        
+
+        
+
+    </div>
+</main>
+
+            
+    <div id="back-to-top" class="back-to-top">
+        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon"><path d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"/></svg></a>
+    </div>
+
+            
+        </div>
+        <script src="../../js/meme.min.10b69ef81544b96691de93039f8eeb6403f8a00b15efb5a7d14f327d2fbd5c99.js" integrity="sha256-ELae+BVEuWaR3pMDn47rZAP4oAsV77Wn0U8yfS+9XJk=" data-no-instant></script>
+
+
+    <script data-no-instant>InstantClick.init();</script>
+
+
+    <script data-no-instant>
+        InstantClick.on('change', function () {
+            backToTop();
+        });
+    </script>
+
+
+
+    <script data-no-instant>
+        InstantClick.on('change', function () {
+            const userPrefers = localStorage.getItem('theme');
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const lightModeMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+            if (userPrefers === "dark") {
+                changeModeMeta("dark");
+                changeMode("🌙", "chroma", "chroma-dark");
+            } else if (userPrefers === "light") {
+                changeModeMeta("light");
+                changeMode("🌞", "chroma-dark", "chroma");
+            } else if (darkModeMediaQuery.matches) {
+                changeModeMeta("dark");
+                changeMode("🌙", "chroma", "chroma-dark");
+            } else if (lightModeMediaQuery.matches) {
+                changeModeMeta("light");
+                changeMode("🌞", "chroma-dark", "chroma");
+            }
+        });
+    </script>
+<script data-no-instant>
+            InstantClick.on('change', function () {
+                gtag('config', 'UA-100434861-1', {
+                    'page_path': location.pathname + location.search
+                });
+            });
+        </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+
+<script>
+    var scroll = new SmoothScroll('a[href*="#"]', {
+        speedAsDuration: true
+    });
+</script>
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist/medium-zoom.min.js"></script>
+
+<script>
+    mediumZoom('[data-zoomable]', {
+        background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)'
+    })
+</script>
+
+
+
+
+    <div class="app-refresh" id="app-refresh">
+        <div class="app-refresh-wrap" onclick="location.reload()">
+            <label>已更新最新版本</label>
+            <span>点击刷新</span>
+        </div>
+    </div>
+
+    <script>
+        if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('../../sw.js')
+            .then(reg => {
+                reg.addEventListener('updatefound', () => {
+                    newWorker = reg.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed') {
+                            if (navigator.serviceWorker.controller) {
+                                showNotification();
+                            }
+                        }
+                    });
+                });
+            });
+        }
+        
+        function showNotification() {
+            document.querySelector('meta[name=theme-color]').content = '#000';
+            document.getElementById('app-refresh').className += ' app-refresh-show';
+        }
+    </script>
+
+
+
+
+
+
+
+    </body>
+</html>
